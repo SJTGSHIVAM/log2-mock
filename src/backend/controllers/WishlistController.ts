@@ -13,19 +13,31 @@ import { formatDate, requiresAuth } from "../utils/authUtils";
  * send GET Request at /api/user/wishlist
  * */
 
+function populateWishlist(wishlist, allProducts) {
+  return wishlist.map(({ id }) => ({
+    ...allProducts[allProducts.findIndex((prod) => prod.id === id)],
+    // ...allProducts.find((prod) => prod.id === id), this code is giving error will check later?
+  }));
+}
+
 export const getWishlistItemsHandler = function (schema, request) {
-  const userId = requiresAuth.call(this, request);
-  if (!userId) {
+  const username = requiresAuth.call(this, request);
+  if (!username) {
     new Response(
       404,
       {},
       {
-        errors: ["The email you entered is not Registered. Not Found error"],
+        errors: "The username you entered is not Registered. Not Found error",
       }
     );
   }
-  const userWishlist = schema.users.findBy({ _id: userId }).wishlist;
-  return new Response(200, {}, { wishlist: userWishlist });
+  const userWishlist = schema.users.findBy({ username }).wishlist;
+  const populatedWishlist = populateWishlist(userWishlist, this.db.products);
+  return new Response(
+    200,
+    {},
+    { wishlist: populateWishlist(userWishlist, this.db.products) }
+  );
 };
 
 /**
@@ -35,26 +47,44 @@ export const getWishlistItemsHandler = function (schema, request) {
  * */
 
 export const addItemToWishlistHandler = function (schema, request) {
-  const userId = requiresAuth.call(this, request);
+  const username = requiresAuth.call(this, request);
   try {
-    if (!userId) {
+    if (!username) {
       new Response(
         404,
         {},
         {
-          errors: ["The email you entered is not Registered. Not Found error"],
+          errors: "The username you entered is not Registered. Not Found error",
         }
       );
     }
-    const userWishlist = schema.users.findBy({ _id: userId }).wishlist;
-    const { product } = JSON.parse(request.requestBody);
-    userWishlist.push({
-      ...product,
-      createdAt: formatDate(),
-      updatedAt: formatDate(),
-    });
-    this.db.users.update({ _id: userId }, { wishlist: userWishlist });
-    return new Response(201, {}, { wishlist: userWishlist });
+    const userWishlist = schema.users.findBy({ username }).wishlist;
+    const { id: prodId } = JSON.parse(request.requestBody);
+    const matchedProduct = schema.products.findBy({ id: prodId });
+    if (!matchedProduct)
+      return new Response(
+        400,
+        {},
+        {
+          errors: "No Such Product found in database",
+        }
+      );
+    const wishlistProductIndex = userWishlist.findIndex(
+      ({ id }) => id === prodId
+    );
+    if (wishlistProductIndex === -1) {
+      userWishlist.push({
+        id: prodId,
+        createdAt: formatDate(),
+        updatedAt: formatDate(),
+      });
+      this.db.users.update({ username: username }, { wishlist: userWishlist });
+    }
+    return new Response(
+      201,
+      {},
+      { wishlist: populateWishlist(userWishlist, this.db.products) }
+    );
   } catch (error) {
     return new Response(
       500,
@@ -73,22 +103,26 @@ export const addItemToWishlistHandler = function (schema, request) {
  * */
 
 export const removeItemFromWishlistHandler = function (schema, request) {
-  const userId = requiresAuth.call(this, request);
+  const username = requiresAuth.call(this, request);
   try {
-    if (!userId) {
+    if (!username) {
       new Response(
-        404,
+        403,
         {},
         {
-          errors: ["The email you entered is not Registered. Not Found error"],
+          errors: "The username you entered is not Registered.",
         }
       );
     }
-    let userWishlist = schema.users.findBy({ _id: userId }).wishlist;
-    const productId = request.params.productId;
-    userWishlist = userWishlist.filter((item) => item._id !== productId);
-    this.db.users.update({ _id: userId }, { wishlist: userWishlist });
-    return new Response(200, {}, { wishlist: userWishlist });
+    let userWishlist = schema.users.findBy({ username }).wishlist;
+    const { prodId } = request.params;
+    userWishlist = userWishlist.filter((item) => item.id !== prodId);
+    this.db.users.update({ username }, { wishlist: userWishlist });
+    return new Response(
+      200,
+      {},
+      { wishlist: populateWishlist(userWishlist, this.db.products) }
+    );
   } catch (error) {
     return new Response(
       500,
