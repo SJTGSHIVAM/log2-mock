@@ -1,31 +1,37 @@
 // @ts-nocheck
-import { Server, Model, RestSerializer } from "miragejs";
+
 import {
   loginHandler,
   signupHandler,
-} from "./backend/controllers/AuthController";
+} from 'backend/controllers/AuthController';
 import {
   addItemToCartHandler,
   getCartItemsHandler,
   removeItemFromCartHandler,
   updateCartItemHandler,
-} from "./backend/controllers/CartController";
+} from 'backend/controllers/CartController';
 import {
   getAllCategoriesHandler,
   getCategoryHandler,
-} from "./backend/controllers/CategoryController";
+} from 'backend/controllers/CategoryController';
 import {
   getAllProductsHandler,
   getProductHandler,
-} from "./backend/controllers/ProductController";
+} from 'backend/controllers/ProductController';
+import { getUserHandler } from 'backend/controllers/UserController';
 import {
   addItemToWishlistHandler,
   getWishlistItemsHandler,
   removeItemFromWishlistHandler,
-} from "./backend/controllers/WishlistController";
-import { categories } from "./backend/db/categories";
-import { products } from "./backend/db/products";
-import { users } from "./backend/db/users";
+} from 'backend/controllers/WishlistController';
+import { categories } from 'backend/db/categories';
+import { products } from 'backend/db/products';
+import { users } from 'backend/db/users';
+import {
+  Model,
+  RestSerializer,
+  Server,
+} from 'miragejs';
 
 export function makeServer({ environment = "development" } = {}) {
   return new Server({
@@ -44,7 +50,7 @@ export function makeServer({ environment = "development" } = {}) {
     // Runs on the start of the server
     seeds(server) {
       // disballing console logs from Mirage
-      server.logging = false;
+      server.logging = true;
       products.forEach((item) => {
         server.create("product", { ...item });
       });
@@ -57,14 +63,17 @@ export function makeServer({ environment = "development" } = {}) {
     },
 
     routes() {
-      this.namespace = "api";
+      // this.namespace = "log2";
       // auth routes (public)
-      this.post("/auth/signup", signupHandler.bind(this));
-      this.post("/auth/login", loginHandler.bind(this));
+      this.post("/user/signup", signupHandler.bind(this));
+      this.post("/user/login", loginHandler.bind(this));
+
+      // user (private)
+      this.get("/user", getUserHandler.bind(this));
 
       // products routes (public)
       this.get("/products", getAllProductsHandler.bind(this));
-      this.get("/products/:productId", getProductHandler.bind(this));
+      this.get("/products/:prodId", getProductHandler.bind(this));
 
       // categories routes (public)
       this.get("/categories", getAllCategoriesHandler.bind(this));
@@ -73,17 +82,14 @@ export function makeServer({ environment = "development" } = {}) {
       // cart routes (private)
       this.get("/user/cart", getCartItemsHandler.bind(this));
       this.post("/user/cart", addItemToCartHandler.bind(this));
-      this.post("/user/cart/:productId", updateCartItemHandler.bind(this));
-      this.delete(
-        "/user/cart/:productId",
-        removeItemFromCartHandler.bind(this)
-      );
+      this.put("/user/cart/:prodId", updateCartItemHandler.bind(this));
+      this.delete("/user/cart/:prodId", removeItemFromCartHandler.bind(this));
 
       // wishlist routes (private)
       this.get("/user/wishlist", getWishlistItemsHandler.bind(this));
       this.post("/user/wishlist", addItemToWishlistHandler.bind(this));
       this.delete(
-        "/user/wishlist/:productId",
+        "/user/wishlist/:prodId",
         removeItemFromWishlistHandler.bind(this)
       );
     },
