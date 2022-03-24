@@ -1,6 +1,7 @@
 // @ts-nocheck
-import { Response } from "miragejs";
-import { requiresAuth } from "../utils/authUtils";
+import { requiresAuth } from 'backend/utils/authUtils';
+import { Response } from 'miragejs';
+
 /**
  * All the routes related to User are present here.
  * These are Publicly accessible routes.
@@ -8,7 +9,7 @@ import { requiresAuth } from "../utils/authUtils";
 
 /**
  * This handler handles gets all users in the db.
- * send GET Request at /api/user/users/:userId
+ * send GET Request at /user/users/:userId
  * */
 
 export const getUserHandler = function (schema, request) {
@@ -18,7 +19,7 @@ export const getUserHandler = function (schema, request) {
       403,
       {},
       {
-        errors: "The username you entered is not Registered",
+        message: "The username you entered is not Registered",
       }
     );
   }
@@ -28,7 +29,7 @@ export const getUserHandler = function (schema, request) {
     404,
     {},
     {
-      error: "Resource not found",
+      message: "Resource not found",
     }
   );
 };

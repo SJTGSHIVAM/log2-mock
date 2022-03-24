@@ -1,32 +1,37 @@
 // @ts-nocheck
-import { Server, Model, RestSerializer } from "miragejs";
+
 import {
   loginHandler,
   signupHandler,
-} from "./backend/controllers/AuthController";
+} from 'backend/controllers/AuthController';
 import {
   addItemToCartHandler,
   getCartItemsHandler,
   removeItemFromCartHandler,
   updateCartItemHandler,
-} from "./backend/controllers/CartController";
+} from 'backend/controllers/CartController';
 import {
   getAllCategoriesHandler,
   getCategoryHandler,
-} from "./backend/controllers/CategoryController";
+} from 'backend/controllers/CategoryController';
 import {
   getAllProductsHandler,
   getProductHandler,
-} from "./backend/controllers/ProductController";
+} from 'backend/controllers/ProductController';
+import { getUserHandler } from 'backend/controllers/UserController';
 import {
   addItemToWishlistHandler,
   getWishlistItemsHandler,
   removeItemFromWishlistHandler,
-} from "./backend/controllers/WishlistController";
-import { getUserHandler } from "./backend/controllers/UserController";
-import { categories } from "./backend/db/categories";
-import { products } from "./backend/db/products";
-import { users } from "./backend/db/users";
+} from 'backend/controllers/WishlistController';
+import { categories } from 'backend/db/categories';
+import { products } from 'backend/db/products';
+import { users } from 'backend/db/users';
+import {
+  Model,
+  RestSerializer,
+  Server,
+} from 'miragejs';
 
 export function makeServer({ environment = "development" } = {}) {
   return new Server({

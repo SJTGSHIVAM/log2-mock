@@ -1,9 +1,10 @@
 // @ts-nocheck
-import { v4 as uuid } from "uuid";
-import { Response } from "miragejs";
-import { formatDate } from "../utils/authUtils";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+
+import { formatDate } from 'backend/utils/authUtils';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import { Response } from 'miragejs';
+import { v4 as uuid } from 'uuid';
 
 /**
  * All the routes related to Auth are present here.
@@ -12,7 +13,7 @@ import jwt from "jsonwebtoken";
 
 /**
  * This handler handles user signups.
- * send POST Request at /api/auth/signup
+ * send POST Request at /auth/signup
  * body contains {firstName, lastName, username, password}
  * */
 
@@ -37,7 +38,7 @@ export const signupHandler = function (schema, request) {
         422,
         {},
         {
-          errors: "Unprocessable Entity. username Already Exists.",
+          message: "Unprocessable Entity. username Already Exists.",
         }
       );
     }
@@ -46,7 +47,7 @@ export const signupHandler = function (schema, request) {
         422,
         {},
         {
-          errors: "Unprocessable Entity. email Already Exists.",
+          message: "Unprocessable Entity. email Already Exists.",
         }
       );
     }
@@ -69,18 +70,29 @@ export const signupHandler = function (schema, request) {
       cart: [],
       wishlist: [],
     };
-    const createdUser = schema.users.create(newUser);
+    schema.users.create(newUser);
     const encodedToken = jwt.sign(
       { id, username },
       process.env.REACT_APP_JWT_SECRET
     );
-    return new Response(201, {}, { createdUser, encodedToken });
+    return new Response(
+      201,
+      {},
+      {
+        id,
+        fname,
+        username,
+        encodedToken,
+        cartLength: 0,
+        wishlistLength: 0,
+      }
+    );
   } catch (error) {
     return new Response(
       500,
       {},
       {
-        error,
+        message: error.message,
       }
     );
   }
@@ -88,7 +100,7 @@ export const signupHandler = function (schema, request) {
 
 /**
  * This handler handles user login.
- * send POST Request at /api/auth/login
+ * send POST Request at /auth/login
  * body contains {username, password}
  * */
 
@@ -101,7 +113,8 @@ export const loginHandler = function (schema, request) {
         404,
         {},
         {
-          errors: "The username you entered is not Registered. Not Found error",
+          message:
+            "The username you entered is not Registered. Not Found error",
         }
       );
     }
@@ -145,7 +158,7 @@ export const loginHandler = function (schema, request) {
       401,
       {},
       {
-        errors:
+        message:
           "The credentials you entered are invalid. Unauthorized access error.",
       }
     );
@@ -154,7 +167,7 @@ export const loginHandler = function (schema, request) {
       500,
       {},
       {
-        error,
+        message: error.message,
       }
     );
   }

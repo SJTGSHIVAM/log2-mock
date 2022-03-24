@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { Response } from "miragejs";
+import { Response } from 'miragejs';
 
 /**
  * All the routes related to Product are present here.
@@ -8,7 +8,7 @@ import { Response } from "miragejs";
 
 /**
  * This handler handles gets all products in the db.
- * send GET Request at /api/products
+ * send GET Request at /products
  * */
 
 export const getAllProductsHandler = function () {
@@ -17,7 +17,7 @@ export const getAllProductsHandler = function () {
 
 /**
  * This handler handles gets all products in the db.
- * send GET Request at /api/user/products/:productId
+ * send GET Request at /user/products/:productId
  * */
 
 export const getProductHandler = function (schema, request) {
@@ -29,7 +29,7 @@ export const getProductHandler = function (schema, request) {
     404,
     {},
     {
-      error: "Resource not found",
+      message: "Resource not found",
     }
   );
 };

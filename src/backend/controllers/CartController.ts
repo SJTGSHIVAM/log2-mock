@@ -1,6 +1,9 @@
 // @ts-nocheck
-import { Response } from "miragejs";
-import { formatDate, requiresAuth } from "../utils/authUtils";
+import {
+  formatDate,
+  requiresAuth,
+} from 'backend/utils/authUtils';
+import { Response } from 'miragejs';
 
 /**
  * All the routes related to Cart are present here.
@@ -10,7 +13,7 @@ import { formatDate, requiresAuth } from "../utils/authUtils";
 
 /**
  * This handler handles getting items to user's cart.
- * send GET Request at /api/user/cart
+ * send GET Request at /user/cart
  * */
 function populateCart(cart, allProducts) {
   return cart.map(({ id, qty }) => ({
@@ -27,7 +30,7 @@ export const getCartItemsHandler = function (schema, request) {
       404,
       {},
       {
-        errors: "The username you entered is not Registered. Not Found error",
+        message: "The username you entered is not Registered. Not Found error",
       }
     );
   }
@@ -38,7 +41,7 @@ export const getCartItemsHandler = function (schema, request) {
 
 /**
  * This handler handles adding items to user's cart.
- * send POST Request at /api/user/cart
+ * send POST Request at /user/cart
  * body contains {product}
  * */
 
@@ -50,7 +53,8 @@ export const addItemToCartHandler = function (schema, request) {
         404,
         {},
         {
-          errors: "The username you entered is not Registered. Not Found error",
+          message:
+            "The username you entered is not Registered. Not Found error",
         }
       );
     }
@@ -64,7 +68,7 @@ export const addItemToCartHandler = function (schema, request) {
         400,
         {},
         {
-          errors: "No Such Product found in database",
+          message: "No Such Product found in database",
         }
       );
     const cartProductIndex = userCart.findIndex(({ id }) => id === prodId);
@@ -90,7 +94,7 @@ export const addItemToCartHandler = function (schema, request) {
       500,
       {},
       {
-        error,
+        message: error.message,
       }
     );
   }
@@ -98,7 +102,7 @@ export const addItemToCartHandler = function (schema, request) {
 
 /**
  * This handler handles removing items to user's cart.
- * send DELETE Request at /api/user/cart/:productId
+ * send DELETE Request at /user/cart/:productId
  * */
 
 export const removeItemFromCartHandler = function (schema, request) {
@@ -109,7 +113,7 @@ export const removeItemFromCartHandler = function (schema, request) {
         403,
         {},
         {
-          errors: "The username you entered is not Registered.",
+          message: "The username you entered is not Registered.",
         }
       );
     }
@@ -124,7 +128,7 @@ export const removeItemFromCartHandler = function (schema, request) {
       500,
       {},
       {
-        error,
+        message: error.message,
       }
     );
   }
@@ -132,7 +136,7 @@ export const removeItemFromCartHandler = function (schema, request) {
 
 /**
  * This handler handles adding items to user's cart.
- * send POST Request at /api/user/cart/:productId
+ * send POST Request at /user/cart/:productId
  * body contains {action} (whose 'type' can be increment or decrement)
  * */
 
@@ -144,7 +148,7 @@ export const updateCartItemHandler = function (schema, request) {
         403,
         {},
         {
-          errors: "The username you entered is not Registered. ",
+          message: "The username you entered is not Registered. ",
         }
       );
     }
@@ -158,7 +162,7 @@ export const updateCartItemHandler = function (schema, request) {
         400,
         {},
         {
-          error: "Bad request no such product exist on cart",
+          message: "Bad request no such product exist on cart",
         }
       );
     if (action === "INCR") {
@@ -180,7 +184,7 @@ export const updateCartItemHandler = function (schema, request) {
         400,
         {},
         {
-          error: `action should be "DEC" or "INCR" `,
+          message: `action should be "DEC" or "INCR" `,
         }
       );
     console.log("if passed");
@@ -194,7 +198,7 @@ export const updateCartItemHandler = function (schema, request) {
       500,
       {},
       {
-        error,
+        message: error.message,
       }
     );
   }

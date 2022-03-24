@@ -1,6 +1,10 @@
 // @ts-nocheck
-import { Response } from "miragejs";
-import { formatDate, requiresAuth } from "../utils/authUtils";
+
+import {
+  formatDate,
+  requiresAuth,
+} from 'backend/utils/authUtils';
+import { Response } from 'miragejs';
 
 /**
  * All the routes related to Wishlist are present here.
@@ -10,7 +14,7 @@ import { formatDate, requiresAuth } from "../utils/authUtils";
 
 /**
  * This handler handles getting items to user's wishlist.
- * send GET Request at /api/user/wishlist
+ * send GET Request at /user/wishlist
  * */
 
 function populateWishlist(wishlist, allProducts) {
@@ -27,7 +31,7 @@ export const getWishlistItemsHandler = function (schema, request) {
       404,
       {},
       {
-        errors: "The username you entered is not Registered. Not Found error",
+        message: "The username you entered is not Registered. Not Found error",
       }
     );
   }
@@ -42,7 +46,7 @@ export const getWishlistItemsHandler = function (schema, request) {
 
 /**
  * This handler handles adding items to user's wishlist.
- * send POST Request at /api/user/wishlist
+ * send POST Request at /user/wishlist
  * body contains {product}
  * */
 
@@ -54,7 +58,8 @@ export const addItemToWishlistHandler = function (schema, request) {
         404,
         {},
         {
-          errors: "The username you entered is not Registered. Not Found error",
+          message:
+            "The username you entered is not Registered. Not Found error",
         }
       );
     }
@@ -66,7 +71,7 @@ export const addItemToWishlistHandler = function (schema, request) {
         400,
         {},
         {
-          errors: "No Such Product found in database",
+          message: "No Such Product found in database",
         }
       );
     const wishlistProductIndex = userWishlist.findIndex(
@@ -90,7 +95,7 @@ export const addItemToWishlistHandler = function (schema, request) {
       500,
       {},
       {
-        error,
+        message: error.message,
       }
     );
   }
@@ -98,7 +103,7 @@ export const addItemToWishlistHandler = function (schema, request) {
 
 /**
  * This handler handles removing items to user's wishlist.
- * send DELETE Request at /api/user/wishlist
+ * send DELETE Request at /user/wishlist
  * body contains {product}
  * */
 
@@ -110,7 +115,7 @@ export const removeItemFromWishlistHandler = function (schema, request) {
         403,
         {},
         {
-          errors: "The username you entered is not Registered.",
+          message: "The username you entered is not Registered.",
         }
       );
     }
@@ -128,7 +133,7 @@ export const removeItemFromWishlistHandler = function (schema, request) {
       500,
       {},
       {
-        error,
+        message: error.message,
       }
     );
   }
