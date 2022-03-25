@@ -1,0 +1,96 @@
+/* *************************   This file contains minor fixes that are needed in the library and some overriding css that will help us make custom ui ******************* */
+
+sub {
+  font-size: 1ex;
+  vertical-align: sub;
+}
+
+.tui__slider {
+  width: 90%;
+}
+.tui__hw--100 {
+  height: 100%;
+  width: 100%;
+}
+
+.tui__input--area {
+  resize: none;
+  overflow: auto;
+  width: 100%;
+  padding: var(--button-padding-xs);
+  outline: var(--g-border-width-xs) solid var(--body-text-color);
+}
+
+/*=============================================
+  =            carousel            =
+  =============================================*/
+
+.tui__carousel {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.tui__carousel--slides {
+  width: 500%;
+  height: 100%;
+  display: flex;
+}
+
+.tui__carousel--slides input {
+  display: none;
+}
+
+.tui__carousel--slide {
+  width: 20%;
+  transition: 2s;
+}
+
+.tui__carousel--manual-navigation {
+  position: absolute;
+  width: 100%;
+  top: 95%;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.tui__carousel--manual-btn {
+  border: 2px solid var(--primary-col);
+  padding: 0.2rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 1s;
+}
+
+.tui__carousel--manual-btn:hover {
+  background: var(--primary-col);
+}
+
+#radio1:checked ~ .tui__first {
+  margin-left: 0;
+}
+
+#radio2:checked ~ .tui__first {
+  margin-left: -20%;
+}
+
+#radio3:checked ~ .tui__first {
+  margin-left: -40%;
+}
+
+#radio4:checked ~ .tui__first {
+  margin-left: -60%;
+}
+#radio5:checked ~ .tui__first {
+  margin-left: -80%;
+}
+
+.tui__active {
+  background-color: var(--primary-col);
+}
+
+/*=====  End of carousel  ======*/
+
+/*=====  End of  fixes  ======*/
