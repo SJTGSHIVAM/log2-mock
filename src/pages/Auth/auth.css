@@ -1,0 +1,16 @@
+.lg2__card--reg,
+.lg2__card--forgot,
+.lg2__card--login {
+  width: 20rem;
+  margin: auto;
+}
+.lg2__ol--gap * {
+  padding: 1rem;
+}
+@media screen and (min-width: 768px) {
+  .lg2__card--reg,
+  .lg2__card--forgot,
+  .lg2__card--login {
+    width: 40rem;
+  }
+}

@@ -39,7 +39,7 @@ export const Navbar = () => (
       </li>
       <li>
         <button className="tui__btn--link-br-none tui__m-in-xs">
-          <Link to="/auth">Log in</Link>
+          <Link to="/user/login">Log in</Link>
         </button>
       </li>
       <li>

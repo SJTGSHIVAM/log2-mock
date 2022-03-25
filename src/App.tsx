@@ -1,8 +1,18 @@
 import './styles.css';
 
+import {
+  FORGOT_PASS_ROUTE,
+  USER_LOGIN_ROUTE,
+  USER_SIGNUP_ROUTE,
+} from 'consts';
 // @ts-ignore
 import Mockman from 'mockman-js';
-import { Home } from 'pages';
+import {
+  ForgotPass,
+  Home,
+  Login,
+  Signup,
+} from 'pages';
 import {
   Route,
   Routes,
@@ -16,10 +26,15 @@ import {
 export default function App() {
   return (
     <div className="App">
-      <Navbar />
+      <header className="lg2__header">
+        <Navbar />
+      </header>
       <main className="lg2__main tui__m-xl">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path={USER_LOGIN_ROUTE} element={<Login />} />
+          <Route path={USER_SIGNUP_ROUTE} element={<Signup />} />
+          <Route path={FORGOT_PASS_ROUTE} element={<ForgotPass />} />
           <Route path="/mockman" element={<Mockman />} />
         </Routes>
       </main>
