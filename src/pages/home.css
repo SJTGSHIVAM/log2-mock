@@ -1,0 +1,29 @@
+.lg2__category {
+  width: 45vw;
+  height: 300px;
+  flex-grow: 0;
+}
+.lg2__categories {
+  display: flex;
+
+  flex-wrap: wrap;
+  justify-content: center;
+}
+@media screen and (min-width: 40rem) {
+  .lg2__category {
+    height: 300px;
+    width: 35vw;
+  }
+}
+@media screen and (min-width: 60rem) {
+  .lg2__category {
+    height: 250px;
+    width: 25vw;
+  }
+}
+@media screen and (min-width: 96rem) {
+  .lg2__category {
+    height: 250px;
+    width: 15vw;
+  }
+}

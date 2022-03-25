@@ -1,0 +1,26 @@
+@media screen and (min-width: 60rem) {
+  body {
+    display: grid;
+    grid-template-areas:
+      "nav nav nav nav nav nav nav nav nav nav nav nav"
+      "lside lside con con con con con con con con rside rside"
+      "foot foot foot foot foot foot foot foot foot foot foot foot";
+    grid-template-rows: minmax(10vh, max-content) 1fr minmax(10vh, max-content);
+  }
+  .lg2__header {
+    grid-area: nav;
+  }
+  .lg2__main {
+    grid-area: con;
+  }
+  .lg2__aside--right {
+    grid-area: rside;
+  }
+  .lg2__footer {
+    grid-area: foot;
+  }
+}
+#root {
+  margin: 0;
+  padding: 0;
+}

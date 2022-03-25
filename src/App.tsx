@@ -17,10 +17,12 @@ export default function App() {
   return (
     <div className="App">
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/mockman" element={<Mockman />} />
-      </Routes>
+      <main className="lg2__main tui__m-xl">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/mockman" element={<Mockman />} />
+        </Routes>
+      </main>
       <Footer />
     </div>
   );

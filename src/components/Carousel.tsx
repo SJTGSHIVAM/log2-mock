@@ -8,9 +8,11 @@ import {
 export const Carousel = ({
   height,
   width,
+  className = "",
 }: {
   height: string;
   width: string;
+  className?: string;
 }) => {
   const carouselImgs: Array<{ src: string; alt: string }> = [
     { src: `${BASE_IMG_URL}/${WEBP_IMG}/books1.webp`, alt: "books" },
@@ -20,7 +22,10 @@ export const Carousel = ({
   ];
   const [activeSlide, setActiveSlide] = useState(0);
   return (
-    <div className="lg2__carousel--wrapper" style={{ height, width }}>
+    <div
+      className={`lg2__carousel--wrapper ${className}`}
+      style={{ height, width }}
+    >
       <section className="tui__carousel">
         <div className="tui__carousel--slides">
           {carouselImgs.map((img, index) => (

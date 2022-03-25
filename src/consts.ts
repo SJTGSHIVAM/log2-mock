@@ -8,4 +8,16 @@ const PNG_IMG = "pngs";
 
 const WEBP_IMG = "webps";
 
-export { BASE_API_URL, BASE_IMG_URL, PNG_IMG, SVG_IMG, WEBP_IMG };
+const AVIF_IMG = "avif";
+
+const JPG_IMG = "jpgs";
+
+export {
+  AVIF_IMG,
+  BASE_API_URL,
+  BASE_IMG_URL,
+  JPG_IMG,
+  PNG_IMG,
+  SVG_IMG,
+  WEBP_IMG,
+};
