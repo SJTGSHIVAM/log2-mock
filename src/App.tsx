@@ -1,5 +1,3 @@
-import './styles.css';
-
 import {
   FORGOT_PASS_ROUTE,
   USER_LOGIN_ROUTE,
