@@ -20,7 +20,9 @@ import {
 
 import {
   Footer,
+  LoggedOutRoute,
   Navbar,
+  ProtectedRoute,
 } from './components';
 
 export default function App() {
@@ -32,9 +34,25 @@ export default function App() {
       <main className="lg2__main tui__m-xl">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path={USER_LOGIN_ROUTE} element={<Login />} />
-          <Route path={USER_SIGNUP_ROUTE} element={<Signup />} />
-          <Route path={FORGOT_PASS_ROUTE} element={<ForgotPass />} />
+          <Route path="/" element={<LoggedOutRoute />}>
+            <Route path={USER_LOGIN_ROUTE} element={<Login />} />
+            <Route path={USER_SIGNUP_ROUTE} element={<Signup />} />
+            <Route path={FORGOT_PASS_ROUTE} element={<ForgotPass />} />
+          </Route>
+          <Route path="/" element={<ProtectedRoute />}>
+            <Route
+              path="/user"
+              element={<h1>User page is under construction</h1>}
+            />
+            <Route
+              path="/user/cart"
+              element={<h1>cart page is under construction</h1>}
+            />
+            <Route
+              path="/user/wishlist"
+              element={<h1>wishlist page is under construction</h1>}
+            />
+          </Route>
           <Route path="/mockman" element={<Mockman />} />
         </Routes>
       </main>

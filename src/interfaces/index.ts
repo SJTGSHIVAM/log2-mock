@@ -21,10 +21,7 @@ interface UserSignupInputData {
   contact: number;
   password: string;
 }
-interface MirageError {
-  message: string;
-  stack?: string;
-}
+
 interface AuthHead {
   authorinzation: string;
 }
@@ -67,7 +64,6 @@ interface User {
 export type {
   AuthHead,
   CartProduct,
-  MirageError,
   Product,
   User,
   UserLoginData,

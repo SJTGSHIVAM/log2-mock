@@ -3,7 +3,6 @@ import { BASE_API_URL } from 'consts';
 import {
   AuthHead,
   CartProduct,
-  MirageError,
   Product,
   User,
   UserLoginData,
@@ -13,7 +12,7 @@ import {
 import { CartAction } from 'types';
 
 const userLogin = async ({ username, password }: UserLoginInputData) =>
-  axios.post<UserLoginData | MirageError>(`${BASE_API_URL}/user/login`, {
+  axios.post<UserLoginData>(`${BASE_API_URL}/user/login`, {
     username,
     password,
   });
@@ -29,7 +28,7 @@ const userSignup = async ({
   contact,
   password,
 }: UserSignupInputData) =>
-  axios.post<UserLoginData | MirageError>(`${BASE_API_URL}/user/signup`, {
+  axios.post<UserLoginData>(`${BASE_API_URL}/user/signup`, {
     fname,
     lname,
     username,
@@ -41,20 +40,17 @@ const userSignup = async ({
     password,
   });
 const getUser = async ({ authorinzation }: AuthHead) =>
-  axios.get<{ user: User } | MirageError>(`${BASE_API_URL}/user`, {
+  axios.get<{ user: User }>(`${BASE_API_URL}/user`, {
     headers: { authorinzation },
   });
 
 const getUserCart = async ({ authorinzation }: AuthHead) =>
-  axios.get<{ cart: Array<CartProduct> } | MirageError>(
-    `${BASE_API_URL}/user/cart`,
-    {
-      headers: { authorinzation },
-    }
-  );
+  axios.get<{ cart: Array<CartProduct> }>(`${BASE_API_URL}/user/cart`, {
+    headers: { authorinzation },
+  });
 
 const postUserCart = async (productId: string, { authorinzation }: AuthHead) =>
-  axios.post<{ cart: Array<CartProduct> } | MirageError>(
+  axios.post<{ cart: Array<CartProduct> }>(
     `${BASE_API_URL}/user/cart`,
     { id: productId },
     {
@@ -67,7 +63,7 @@ const updateUserCartProduct = async (
   payload: number,
   { authorinzation }: AuthHead
 ) =>
-  axios.put<{ cart: Array<CartProduct> } | MirageError>(
+  axios.put<{ cart: Array<CartProduct> }>(
     `${BASE_API_URL}/user/cart/${productId}`,
     { action, payload },
     {
@@ -78,25 +74,22 @@ const deleteUserCartProduct = async (
   productId: string,
   { authorinzation }: AuthHead
 ) =>
-  axios.delete<{ cart: Array<CartProduct> } | MirageError>(
+  axios.delete<{ cart: Array<CartProduct> }>(
     `${BASE_API_URL}/user/cart/${productId}`,
     {
       headers: { authorinzation },
     }
   );
 const getUserWishlist = async ({ authorinzation }: AuthHead) =>
-  axios.get<{ wishlist: Array<Product> } | MirageError>(
-    `${BASE_API_URL}/user/wishlist`,
-    {
-      headers: { authorinzation },
-    }
-  );
+  axios.get<{ wishlist: Array<Product> }>(`${BASE_API_URL}/user/wishlist`, {
+    headers: { authorinzation },
+  });
 
 const postUserWishlist = async (
   productId: string,
   { authorinzation }: AuthHead
 ) =>
-  axios.post<{ wishlist: Array<Product> } | MirageError>(
+  axios.post<{ wishlist: Array<Product> }>(
     `${BASE_API_URL}/user/wishlist`,
     { id: productId },
     {
@@ -107,21 +100,17 @@ const deleteUserWishlistProduct = async (
   productId: string,
   { authorinzation }: AuthHead
 ) =>
-  axios.delete<{ cart: Array<Product> } | MirageError>(
+  axios.delete<{ cart: Array<Product> }>(
     `${BASE_API_URL}/user/cart/${productId}`,
     {
       headers: { authorinzation },
     }
   );
 const getProducts = async () =>
-  axios.get<{ products: Array<Product> } | MirageError>(
-    `${BASE_API_URL}/products`
-  );
+  axios.get<{ products: Array<Product> }>(`${BASE_API_URL}/products`);
 
 const getProduct = async (productId: string) =>
-  axios.get<{ product: Product } | MirageError>(
-    `${BASE_API_URL}/products/${productId}`
-  );
+  axios.get<{ product: Product }>(`${BASE_API_URL}/products/${productId}`);
 
 export {
   deleteUserCartProduct,

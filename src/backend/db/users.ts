@@ -1,7 +1,8 @@
+import bcyrpt from 'bcryptjs';
 // @ts-nocheck
-import { v4 as uuid } from "uuid";
-import bcyrpt from "bcryptjs";
-import { formatDate } from "../utils/authUtils";
+import { v4 as uuid } from 'uuid';
+
+import { formatDate } from '../utils/authUtils';
 
 /**
  * User Database can be added here.
