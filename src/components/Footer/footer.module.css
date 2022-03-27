@@ -1,0 +1,11 @@
+.lg2__footer {
+  grid-area: foot;
+  background-color: transparent;
+  margin: auto auto 1rem auto;
+  padding: 1rem;
+}
+.lg2__footer > ul {
+  display: inline-flex;
+  gap: 3rem;
+  margin: 1rem auto;
+}
