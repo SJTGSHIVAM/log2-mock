@@ -4,6 +4,7 @@ import {
   BASE_IMG_URL,
   WEBP_IMG,
 } from 'consts';
+import { v4 as uuid } from 'uuid';
 
 export const Carousel = ({
   height,
@@ -31,6 +32,7 @@ export const Carousel = ({
           {carouselImgs.map((img, index) => (
             <div
               className={`tui__carousel--slide`}
+              key={uuid()}
               style={{
                 marginLeft: `${
                   index === 0
@@ -46,6 +48,7 @@ export const Carousel = ({
           <div className="tui__carousel--manual-navigation">
             {carouselImgs.map((_, index) => (
               <label
+                key={uuid()}
                 className={`tui__carousel--manual-btn ${
                   index === activeSlide ? "tui__active" : ""
                 }`}

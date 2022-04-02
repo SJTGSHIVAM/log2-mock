@@ -1,9 +1,16 @@
 import './auth.css';
 
-import { USER_LOGIN_ROUTE } from 'consts';
+import { useState } from 'react';
+
+import {
+  BASE_IMG_URL,
+  SVG_IMG,
+  USER_LOGIN_ROUTE,
+} from 'consts';
 import { Link } from 'react-router-dom';
 
 export const Signup = () => {
+  const [showPass, setShowPass] = useState(false);
   return (
     <>
       <div className="tui__card tui__pos--rel tui_card--shadow tui__pd-xs lg2__card--reg">
@@ -63,13 +70,14 @@ export const Signup = () => {
                 <div className="tui__svg--icon-font tui__m-in-xs">
                   <img
                     className="tui__col--svg tui__svg--icon"
-                    src="/assets/svgs/hidden-12114.svg"
+                    src={`${BASE_IMG_URL}/${SVG_IMG}/hidden-12114.svg`}
                     alt="show password"
+                    onClick={() => setShowPass((p) => !p)}
                   />
                 </div>
               </div>
               <input
-                type="password"
+                type={showPass ? "text" : "password"}
                 placeholder="enter password"
                 className="tui__input--val "
                 id="display"
@@ -77,17 +85,18 @@ export const Signup = () => {
             </span>
             <span className="tui__input--box">
               <div className="tui__flex--row-pack">
-                <label htmlFor="display">Password:</label>
+                <label htmlFor="display">Confirm Password:</label>
                 <div className="tui__svg--icon-font tui__m-in-xs">
                   <img
                     className="tui__col--svg tui__svg--icon"
-                    src="/assets/svgs/hidden-12114.svg"
+                    src={`${BASE_IMG_URL}/${SVG_IMG}/hidden-12114.svg`}
                     alt="show password"
+                    onClick={() => setShowPass((p) => !p)}
                   />
                 </div>
               </div>
               <input
-                type="password"
+                type={showPass ? "text" : "password"}
                 placeholder="enter password"
                 className="tui__input--val"
                 id="display"

@@ -41,6 +41,10 @@ interface Product {
   rating: number;
   sellerId: string;
 }
+interface ProductProp {
+  product: Product;
+  isInWishlist: boolean;
+}
 interface CartProduct extends Product {
   qty: number;
 }
@@ -65,6 +69,7 @@ export type {
   AuthHead,
   CartProduct,
   Product,
+  ProductProp,
   User,
   UserLoginData,
   UserLoginInputData,

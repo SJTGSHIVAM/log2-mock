@@ -101,7 +101,7 @@ const deleteUserWishlistProduct = async (
   { authorinzation }: AuthHead
 ) =>
   axios.delete<{ cart: Array<Product> }>(
-    `${BASE_API_URL}/user/cart/${productId}`,
+    `${BASE_API_URL}/user/wishlist/${productId}`,
     {
       headers: { authorinzation },
     }

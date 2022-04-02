@@ -78,10 +78,3 @@ export const userLogger = (initialValue: UserLoginData) => {
   );
   return { loginUser, dispatchLoginUser };
 };
-// useState(() => {
-//   const token = localStorage.getItem("token");
-
-//   if (token) return { token, isAuth: true };
-
-//   return { token: "", isAuth: false };
-// });

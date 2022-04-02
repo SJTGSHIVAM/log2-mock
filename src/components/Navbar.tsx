@@ -55,7 +55,7 @@ export const Navbar = () => {
           </div>
         </li>
         <li>
-          <Link to="/wishlist">
+          <Link to="/user/wishlist">
             <div className="tui__avatar-br-lg tui__flex--center tui__avatar-md tui__m-in-xs">
               <img
                 className="tui__theme--switch tui__col--svg tui__img-hw100"
@@ -65,7 +65,7 @@ export const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/cart">
+          <Link to="/user/cart">
             <div className="tui__avatar-br-lg tui__flex--center tui__avatar-md tui__m-in-xs">
               <img
                 className="tui__theme--switch tui__col--svg tui__img-hw100"
@@ -77,6 +77,7 @@ export const Navbar = () => {
         <li>
           <button className="tui__btn--link-br-none tui__m-in-xs">
             <Link to="/products">Shop now</Link>
+            <Link to="/mockman">mock</Link>
           </button>
         </li>
       </ul>

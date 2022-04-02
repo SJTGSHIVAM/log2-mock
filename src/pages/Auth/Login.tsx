@@ -4,7 +4,9 @@ import React, { useState } from 'react';
 
 import { userLogin } from 'apis';
 import {
+  BASE_IMG_URL,
   FORGOT_PASS_ROUTE,
+  SVG_IMG,
   USER_SIGNUP_ROUTE,
 } from 'consts';
 import {
@@ -67,7 +69,7 @@ export const Login = () => {
                   <div className="tui__svg--icon-font tui__m-in-xs">
                     <img
                       className="tui__col--svg tui__svg--icon"
-                      src="/assets/svgs/hidden-12114.svg"
+                      src={`${BASE_IMG_URL}/${SVG_IMG}/hidden-12114.svg`}
                       alt="show password"
                       onClick={() => setShowPass((p) => !p)}
                     />
@@ -89,7 +91,7 @@ export const Login = () => {
           </div>
           {error !== "" && (
             <div className="tui__alert--error tui__m-auto">
-              <p className="tui__text-xs">{error}</p>
+              <p className="tui__text-xs tui__text-col--black">{error}</p>
             </div>
           )}
         </div>
