@@ -11,6 +11,7 @@ import {
   Login,
   ProductList,
   Signup,
+  Wishlist,
 } from 'pages';
 import {
   Route,
@@ -39,19 +40,13 @@ export default function App() {
             <Route path={USER_SIGNUP_ROUTE} element={<Signup />} />
             <Route path={FORGOT_PASS_ROUTE} element={<ForgotPass />} />
           </Route>
-          <Route path="/" element={<ProtectedRoute />}>
+          <Route path="/user" element={<ProtectedRoute />}>
+            <Route path="" element={<h1>User page is under construction</h1>} />
             <Route
-              path="/user"
-              element={<h1>User page is under construction</h1>}
-            />
-            <Route
-              path="/user/cart"
+              path="cart"
               element={<h1>cart page is under construction</h1>}
             />
-            <Route
-              path="/user/wishlist"
-              element={<h1>wishlist page is under construction</h1>}
-            />
+            <Route path="wishlist" element={<Wishlist />} />
           </Route>
           <Route path="/mockman" element={<Mockman />} />
         </Routes>
