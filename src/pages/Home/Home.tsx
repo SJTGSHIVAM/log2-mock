@@ -7,6 +7,7 @@ import {
   JPG_IMG,
   WEBP_IMG,
 } from 'consts';
+import { v4 as uuid } from 'uuid';
 
 export const Home = () => {
   const categories = [
@@ -54,7 +55,7 @@ export const Home = () => {
       </p>
       <div className="lg2__categories">
         {categories.map(({ label, src, alt }) => (
-          <div className="lg2__category tui__m-xl">
+          <div className="lg2__category tui__m-xl" key={uuid()}>
             <div
               className="tui__badge--ribbon tui__hw--100 tui__pos--rel tui__ribbon--bg-col"
               data-label={label}

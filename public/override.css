@@ -1,9 +1,23 @@
 /* *************************   This file contains minor fixes that are needed in the library and some overriding css that will help us make custom ui ******************* */
 
+/*=============================================
+=            typography            =
+=============================================*/
+
 sub {
   font-size: 1ex;
   vertical-align: sub;
 }
+
+.tui__text-col--black {
+  color: black;
+}
+
+.tui__text--strike {
+  text-decoration: line-through;
+}
+
+/*=====  End of typography  ======*/
 
 .tui__slider {
   width: 90%;
@@ -90,7 +104,21 @@ sub {
 .tui__active {
   background-color: var(--primary-col);
 }
-
+.tui__flex--wrap {
+  flex-wrap: wrap;
+}
+.tui__cursor--pointer {
+  cursor: pointer;
+}
 /*=====  End of carousel  ======*/
 
 /*=====  End of  fixes  ======*/
+
+/*=============================================
+=            z index            =
+=============================================*/
+.tui__z--1 {
+  z-index: 1;
+}
+
+/*=====  End of z index  ======*/

@@ -1,0 +1,22 @@
+:root {
+  --primary-col: #aa57cb;
+  --primary-col-fil: invert(85%) sepia(19%) saturate(904%) hue-rotate(180deg)
+    brightness(104%) contrast(105%);
+  --secondary-col: #6fa7cc;
+  --secondary-col-fil: invert(26%) sepia(85%) saturate(1144%) hue-rotate(171deg)
+    brightness(94%) contrast(98%);
+  --dark: #ffffff;
+  --dark-fil: invert(100%) sepia(0%) saturate(7491%) hue-rotate(347deg)
+    brightness(109%) contrast(98%);
+  --dark-light: #dddddd;
+  --dark-ligt-fil: invert(53%) sepia(1%) saturate(2752%) hue-rotate(189deg)
+    brightness(85%) contrast(80%);
+  --white: #101311;
+  --white-fil: invert(6%) sepia(9%) saturate(979%) hue-rotate(176deg)
+    brightness(96%) contrast(86%);
+  --white-dark: #5d5d5d;
+  --white-dark-fil: invert(99%) sepia(6%) saturate(3458%) hue-rotate(174deg)
+    brightness(112%) contrast(91%);
+  --shadows-md: var(--theme-dark) 2.4px 2.4px 3.2px;
+  --tui-btn-link-bg: var(--primary-col);
+}

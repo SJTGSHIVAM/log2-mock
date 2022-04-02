@@ -27,7 +27,7 @@ interface AuthHead {
 }
 interface Product {
   id: string;
-  tags: string;
+  tags: Array<string>;
   publisher: string;
   name: string;
   author: string;
@@ -40,6 +40,10 @@ interface Product {
   inStock: boolean;
   rating: number;
   sellerId: string;
+}
+interface ProductProp {
+  product: Product;
+  isInWishlist: boolean;
 }
 interface CartProduct extends Product {
   qty: number;
@@ -65,6 +69,7 @@ export type {
   AuthHead,
   CartProduct,
   Product,
+  ProductProp,
   User,
   UserLoginData,
   UserLoginInputData,

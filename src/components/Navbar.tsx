@@ -31,12 +31,14 @@ export const Navbar = () => {
         </span>
       </div>
       <ul className="tui__nav--list">
-        <li className="tui__flex--center">
-          <Link to="/profile">{loginUser.username}</Link>
-        </li>
+        {isAuth() && (
+          <li className="tui__flex--center tui__active tui__avatar-md tui__avatar-br-lg">
+            <Link to="/profile">{loginUser.username[0].toUpperCase()}</Link>
+          </li>
+        )}
         <li>
           <button
-            className="tui__btn--link-br-none tui__m-in-xs"
+            className="tui__btn--link-br-none tui__m-in-xxs"
             onClick={() => dispatchLoginUser(userLogoutAction())}
           >
             {isAuth() ? (
@@ -47,7 +49,7 @@ export const Navbar = () => {
           </button>
         </li>
         <li>
-          <div className="tui__avatar-br-lg tui__flex--center tui__avatar-md tui__m-in-xs">
+          <div className="tui__avatar-br-lg tui__flex--center tui__avatar-md tui__m-in-xxs">
             <img
               className="tui__theme--switch tui__col--svg tui__img-hw100"
               src={`${BASE_IMG_URL}/${SVG_IMG}/moon.svg`}
@@ -55,8 +57,8 @@ export const Navbar = () => {
           </div>
         </li>
         <li>
-          <Link to="/wishlist">
-            <div className="tui__avatar-br-lg tui__flex--center tui__avatar-md tui__m-in-xs">
+          <Link to="/user/wishlist">
+            <div className="tui__avatar-br-lg tui__flex--center tui__avatar-md tui__m-in-xxs">
               <img
                 className="tui__theme--switch tui__col--svg tui__img-hw100"
                 src={`${BASE_IMG_URL}/${SVG_IMG}/hollowheart.svg`}
@@ -65,8 +67,8 @@ export const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link to="/cart">
-            <div className="tui__avatar-br-lg tui__flex--center tui__avatar-md tui__m-in-xs">
+          <Link to="/user/cart">
+            <div className="tui__avatar-br-lg tui__flex--center tui__avatar-md tui__m-in-xxs">
               <img
                 className="tui__theme--switch tui__col--svg tui__img-hw100"
                 src={`${BASE_IMG_URL}/${SVG_IMG}/cart.svg`}
@@ -75,8 +77,9 @@ export const Navbar = () => {
           </Link>
         </li>
         <li>
-          <button className="tui__btn--link-br-none tui__m-in-xs">
+          <button className="tui__btn--link-br-none tui__m-in-xxs">
             <Link to="/products">Shop now</Link>
+            <Link to="/mockman">mock</Link>
           </button>
         </li>
       </ul>

@@ -9,6 +9,7 @@ import {
   ForgotPass,
   Home,
   Login,
+  ProductList,
   Signup,
 } from 'pages';
 import {
@@ -32,6 +33,7 @@ export default function App() {
       <main className="lg2__main tui__m-xl">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/products" element={<ProductList />} />
           <Route path="/" element={<LoggedOutRoute />}>
             <Route path={USER_LOGIN_ROUTE} element={<Login />} />
             <Route path={USER_SIGNUP_ROUTE} element={<Signup />} />
@@ -54,6 +56,7 @@ export default function App() {
           <Route path="/mockman" element={<Mockman />} />
         </Routes>
       </main>
+
       <Footer />
     </div>
   );

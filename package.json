@@ -10,11 +10,13 @@
   "main": "src/index.tsx",
   "dependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/lodash.throttle": "^4.1.6",
     "@types/react-router-dom": "^5.3.3",
     "@types/uuid": "^8.3.4",
     "bcryptjs": "^2.4.3",
     "dayjs": "^1.10.8",
     "jsonwebtoken": "^8.5.1",
+    "lodash.throttle": "^4.1.1",
     "miragejs": "^0.1.43",
     "mockman-js": "1.0.5",
     "patch-package": "^6.4.7",
