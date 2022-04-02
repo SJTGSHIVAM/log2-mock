@@ -106,13 +106,13 @@ export const ProductCard = ({
       <div className="tui__card--body tui__pd-xs">
         <div className="tui__flex--row-space-between">
           <p>
-            <span className="tui__text-sm tui__b-3 tui__text--strike tui__m-r-xs">
-              ₹ {price}
-            </span>
-
             {discount > 0 && (
-              <span className="tui__text-sm tui__b-3 ">₹ {discountPrice}</span>
+              <span className="tui__text-sm tui__b-3 tui__text--strike tui__m-r-xs">
+                ₹ {price}
+              </span>
             )}
+
+            <span className="tui__text-sm tui__b-3 ">₹ {discountPrice}</span>
           </p>
           <p>
             <span className="tui__text-sm">Rating: {rating}</span>
