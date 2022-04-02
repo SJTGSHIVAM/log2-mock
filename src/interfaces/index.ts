@@ -27,7 +27,7 @@ interface AuthHead {
 }
 interface Product {
   id: string;
-  tags: string;
+  tags: Array<string>;
   publisher: string;
   name: string;
   author: string;

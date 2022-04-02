@@ -18,7 +18,7 @@ interface FilterValues {
 }
 
 const initialFiltervalues: FilterValues = {
-  highestPriceAmount: 1000,
+  highestPriceAmount: 10000,
   categoryDbms: false,
   categoryAi: false,
   categoryDiscreteMaths: false,
@@ -73,7 +73,7 @@ const reduceFilterValues = (
 };
 export const useFilterReducer = () =>
   useReducer(reduceFilterValues, {
-    highestPriceAmount: 1000,
+    highestPriceAmount: 10000,
     categoryDbms: false,
     categoryAi: false,
     categoryDiscreteMaths: false,

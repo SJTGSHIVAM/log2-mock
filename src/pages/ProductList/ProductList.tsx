@@ -69,8 +69,7 @@ export const ProductList = () => {
                     className="tui__slider tui__slider--pri-col tui__slider--xxxs"
                     name="price"
                     min={500}
-                    max={50000}
-                    defaultValue={50000}
+                    max={10000}
                     value={filterValues.highestPriceAmount}
                     onChange={(e) =>
                       dispatchFilterValues({
@@ -353,15 +352,57 @@ export const ProductList = () => {
       </aside>
       <div className="lg2__products--grid">
         {products.length > 0 &&
-          products.map((product, e) => (
-            <ProductCard
-              product={product}
-              isInWishlist={
-                isAuth() ? userWishlist.some((p) => p.id === product.id) : false
-              }
-              key={e}
-            />
-          ))}
+          [...products]
+            .sort((a, b) =>
+              filterValues.sortByPrice === "HIGH"
+                ? b.discountPrice - a.discountPrice
+                : filterValues.sortByPrice === "LOW"
+                ? a.discountPrice - b.discountPrice
+                : 0
+            )
+            .filter((product) =>
+              product.discountPrice <= filterValues.highestPriceAmount &&
+              product.inStock &&
+              product.rating >= filterValues.rating &&
+              !(
+                filterValues.categoryAi ||
+                filterValues.categoryDSA ||
+                filterValues.categoryDbms ||
+                filterValues.categoryDiscreteMaths ||
+                filterValues.categorySystemDesign ||
+                filterValues.categoryWebDev
+              )
+                ? true
+                : (filterValues.categoryAi
+                    ? product.tags.some((i) => i === "AI")
+                    : false) ||
+                  (filterValues.categoryDSA
+                    ? product.tags.some((i) => i === "DSA")
+                    : false) ||
+                  (filterValues.categoryDbms
+                    ? product.tags.some((i) => i === "DBMS")
+                    : false) ||
+                  (filterValues.categoryDiscreteMaths
+                    ? product.tags.some((i) => i === "Discrete Maths")
+                    : false) ||
+                  (filterValues.categorySystemDesign
+                    ? product.tags.some((i) => i === "System Design")
+                    : false) ||
+                  (filterValues.categoryWebDev
+                    ? product.tags.some((i) => i === "Web Dev")
+                    : false)
+            )
+            .map((product, e) => (
+              <ProductCard
+                product={product}
+                isInWishlist={
+                  isAuth()
+                    ? userWishlist.some((p) => p.id === product.id)
+                    : false
+                }
+                key={e}
+              />
+            ))}
       </div>
     </>
   );

@@ -65,7 +65,7 @@ export const products = [
 
   {
     id: uuid(),
-    tags: ["bestSeller", "WEB DEV"],
+    tags: ["bestSeller", "Web Dev"],
     publisher: "Wiley; 1st edition (18 November 2011)",
     name: "HTML and CSS: Design and Build Websites  ",
     author: "Jon Duckett",
@@ -84,7 +84,7 @@ export const products = [
 
   {
     id: uuid(),
-    tags: ["bestSeller", "WEB DEV"],
+    tags: ["bestSeller", "Web Dev"],
     publisher: " O′Reilly; 4th edition (7 September 2012)",
     name: "Learning Web Design: A beginner’s guide to HTML, CSS, Javascript, and Web Graphics",
     author: "Jennifer Niederst Robbins",
@@ -103,7 +103,7 @@ export const products = [
 
   {
     id: uuid(),
-    tags: ["bestSeller", "WEB DEV"],
+    tags: ["bestSeller", "Web Dev"],
     publisher: " O′Reilly; 1st edition (16 May 2008)",
     name: "Javascript: The Good Parts",
     author: "Douglas Crockford",

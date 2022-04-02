@@ -78,9 +78,7 @@ export const ProductCard = ({
   );
   const addToCartThrottled = useCallback(throttle(addToCart, 1000), []);
 
-  useEffect(() => {
-    console.log(isInWishlistLocalState, "dfdfd");
-  }, [isInWishlist]);
+  useEffect(() => {}, [isInWishlist]);
   return (
     <div className="tui__card tui__flex--col tui__pos--rel  tui__flex--row-space-between tui_card--shadow">
       {" "}
