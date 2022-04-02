@@ -34,7 +34,7 @@ export const ProductList = () => {
           authorinzation: encodedToken,
         });
 
-        setUserWishlist(response.data.wishlist);
+        setUserWishlist([...response.data.wishlist]);
       }
     })();
   }, []);

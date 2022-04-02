@@ -44,7 +44,6 @@ export const ProductCard = ({
   const navigate = useNavigate();
   const [isInWishlistLocalState, setIsInWishlistLocalState] =
     useState(isInWishlist);
-
   const addToCart = async (id: string, encodedToken: string) => {
     try {
       await postUserCart(id, { authorinzation: encodedToken });
@@ -79,7 +78,9 @@ export const ProductCard = ({
   );
   const addToCartThrottled = useCallback(throttle(addToCart, 1000), []);
 
-  useEffect(() => {}, [isInWishlist]);
+  useEffect(() => {
+    setIsInWishlistLocalState(isInWishlist);
+  }, [isInWishlist]);
   return (
     <div className="tui__card tui__flex--col tui__pos--rel  tui__flex--row-space-between tui_card--shadow">
       {" "}

@@ -35,17 +35,20 @@ export const Wishlist = () => {
       {userWishlist.length > 0 ? (
         <div className="lg2__products--grid">
           {userWishlist.map((product, e) => (
-            <WishlistCard
-              product={product}
-              isInWishlist={
-                isAuth() ? userWishlist.some((p) => p.id === product.id) : false
-              }
-              invalidate={() => {
-                console.log(invalidateToggle, "dd");
-                setInvalidateToggle((p) => !p);
-              }}
-              key={e}
-            />
+            <>
+              <WishlistCard
+                product={product}
+                isInWishlist={
+                  isAuth()
+                    ? userWishlist.some((p) => p.id === product.id)
+                    : false
+                }
+                invalidate={() => {
+                  setInvalidateToggle((p) => !p);
+                }}
+                key={e}
+              />
+            </>
           ))}
         </div>
       ) : (
