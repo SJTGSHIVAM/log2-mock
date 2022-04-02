@@ -1,13 +1,11 @@
 import {
   useCallback,
   useEffect,
-  useState,
 } from 'react';
 
 import {
   deleteUserWishlistProduct,
   postUserCart,
-  postUserWishlist,
 } from 'apis';
 import {
   BASE_IMG_URL,
@@ -18,7 +16,7 @@ import { ProductProp } from 'interfaces';
 import throttle from 'lodash.throttle';
 import { useNavigate } from 'react-router-dom';
 
-export const ProductCard = ({
+export const WishlistCard = ({
   product: {
     id,
     tags,
@@ -36,14 +34,14 @@ export const ProductCard = ({
     sellerId,
   },
   isInWishlist,
+  invalidate,
 }: ProductProp) => {
   const {
     isAuth,
     loginUser: { encodedToken },
   } = useLogin();
   const navigate = useNavigate();
-  const [isInWishlistLocalState, setIsInWishlistLocalState] =
-    useState(isInWishlist);
+
   const addToCart = async (id: string, encodedToken: string) => {
     try {
       await postUserCart(id, { authorinzation: encodedToken });
@@ -52,24 +50,15 @@ export const ProductCard = ({
     }
   };
   const wishlistToggle = async (
-    isInWishlistLocalState: boolean,
     id: string,
-    encodedToken: string
+    encodedToken: string,
+    invalidate: () => void
   ) => {
-    if (isInWishlistLocalState) {
-      setIsInWishlistLocalState(false);
-      try {
-        await deleteUserWishlistProduct(id, { authorinzation: encodedToken });
-      } catch (error) {
-        setIsInWishlistLocalState(true);
-      }
-    } else {
-      setIsInWishlistLocalState(true);
-      try {
-        await postUserWishlist(id, { authorinzation: encodedToken });
-      } catch (error) {
-        setIsInWishlistLocalState(false);
-      }
+    try {
+      await deleteUserWishlistProduct(id, { authorinzation: encodedToken });
+      invalidate();
+    } catch (error) {
+      //do something
     }
   };
   const wishlistToggleThrottled = useCallback(
@@ -78,9 +67,7 @@ export const ProductCard = ({
   );
   const addToCartThrottled = useCallback(throttle(addToCart, 1000), []);
 
-  useEffect(() => {
-    setIsInWishlistLocalState(isInWishlist);
-  }, [isInWishlist]);
+  useEffect(() => {}, [isInWishlist]);
   return (
     <div className="tui__card tui__flex--col tui__pos--rel  tui__flex--row-space-between tui_card--shadow">
       {" "}
@@ -88,15 +75,14 @@ export const ProductCard = ({
         className="tui__btn--icon-br-xl tui__card--top-btn-r"
         onClick={() =>
           isAuth()
-            ? wishlistToggleThrottled(isInWishlistLocalState, id, encodedToken)
+            ? invalidate &&
+              wishlistToggleThrottled(id, encodedToken, invalidate)
             : navigate("/user/login")
         }
       >
         <img
           className="tui__svg--icon-font"
-          src={`${BASE_IMG_URL}/${SVG_IMG}/${
-            isInWishlistLocalState ? "redheart.svg" : "hollowheart.svg"
-          }`}
+          src={`${BASE_IMG_URL}/${SVG_IMG}/redheart.svg`}
           alt="like"
         />
       </button>

@@ -44,6 +44,7 @@ interface Product {
 interface ProductProp {
   product: Product;
   isInWishlist: boolean;
+  invalidate?: () => void;
 }
 interface CartProduct extends Product {
   qty: number;
