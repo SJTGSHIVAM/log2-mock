@@ -44,15 +44,18 @@ export const ProductCard = ({
   const [isInWishlistLocalState, setIsInWishlistLocalState] =
     useState(isInWishlist);
 
-  const addToCart = async () => {
+  const addToCart = async (id: string, encodedToken: string) => {
     try {
       await postUserCart(id, { authorinzation: encodedToken });
     } catch (error) {
       // will add alerts in actual cart branch
     }
   };
-  const cl = console.log;
-  const wishlistToggle = async (isInWishlistLocalState: boolean) => {
+  const wishlistToggle = async (
+    isInWishlistLocalState: boolean,
+    id: string,
+    encodedToken: string
+  ) => {
     if (isInWishlistLocalState) {
       setIsInWishlistLocalState(false);
       try {
@@ -73,6 +76,7 @@ export const ProductCard = ({
     throttle(wishlistToggle, 1000),
     []
   );
+  const addToCartThrottled = useCallback(throttle(addToCart, 1000), []);
 
   useEffect(() => {
     console.log(isInWishlistLocalState, "dfdfd");
@@ -82,7 +86,9 @@ export const ProductCard = ({
       {" "}
       <button
         className="tui__btn--icon-br-xl tui__card--top-btn-r"
-        onClick={() => wishlistToggleThrottled(isInWishlistLocalState)}
+        onClick={() =>
+          wishlistToggleThrottled(isInWishlistLocalState, id, encodedToken)
+        }
       >
         <img
           className="tui__svg--icon-font"
@@ -123,7 +129,7 @@ export const ProductCard = ({
       <div className="tui__card--footer tui__m-sm">
         <button
           className="tui__btn--link-br-none tui__child--strech"
-          onClick={addToCart}
+          onClick={() => addToCartThrottled(id, encodedToken)}
         >
           Add To Cart
         </button>
