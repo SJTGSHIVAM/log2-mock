@@ -25,7 +25,7 @@ const initialFiltervalues: FilterValues = {
   categorySystemDesign: false,
   categoryDSA: false,
   categoryWebDev: false,
-  rating: 5,
+  rating: 0,
   sortByPrice: "NONE",
 };
 const reduceFilterValues = (

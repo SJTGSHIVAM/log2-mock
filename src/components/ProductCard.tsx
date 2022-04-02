@@ -16,6 +16,7 @@ import {
 import { useLogin } from 'hooks';
 import { ProductProp } from 'interfaces';
 import throttle from 'lodash.throttle';
+import { useNavigate } from 'react-router-dom';
 
 export const ProductCard = ({
   product: {
@@ -40,7 +41,7 @@ export const ProductCard = ({
     isAuth,
     loginUser: { encodedToken },
   } = useLogin();
-
+  const navigate = useNavigate();
   const [isInWishlistLocalState, setIsInWishlistLocalState] =
     useState(isInWishlist);
 
@@ -85,7 +86,9 @@ export const ProductCard = ({
       <button
         className="tui__btn--icon-br-xl tui__card--top-btn-r"
         onClick={() =>
-          wishlistToggleThrottled(isInWishlistLocalState, id, encodedToken)
+          isAuth()
+            ? wishlistToggleThrottled(isInWishlistLocalState, id, encodedToken)
+            : navigate("/user/login")
         }
       >
         <img
@@ -127,7 +130,11 @@ export const ProductCard = ({
       <div className="tui__card--footer tui__m-sm">
         <button
           className="tui__btn--link-br-none tui__child--strech"
-          onClick={() => addToCartThrottled(id, encodedToken)}
+          onClick={() =>
+            isAuth()
+              ? addToCartThrottled(id, encodedToken)
+              : navigate("/user/login")
+          }
         >
           Add To Cart
         </button>

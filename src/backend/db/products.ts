@@ -17,8 +17,8 @@ export const products = [
     imgAlt: "image link",
     description:
       "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum  ",
-    discountPrice: 3500,
-    price: 2500,
+    discountPrice: 2500,
+    price: 3500,
     discount: 30,
     inStock: true,
     rating: 3.5,
@@ -40,7 +40,7 @@ export const products = [
     price: 2000,
     discount: 25,
     inStock: true,
-    rating: 4.0,
+    rating: 1.0,
     sellerId: "112",
   },
 
@@ -59,7 +59,7 @@ export const products = [
     price: 2200,
     discount: 25,
     inStock: true,
-    rating: 4.3,
+    rating: 2.3,
     sellerId: "114",
   },
 
@@ -78,7 +78,7 @@ export const products = [
     price: 2655,
     discount: 10,
     inStock: true,
-    rating: 3.8,
+    rating: 5,
     sellerId: "116",
   },
 
@@ -116,7 +116,7 @@ export const products = [
     price: 2800,
     discount: 25,
     inStock: true,
-    rating: 4.4,
+    rating: 0.5,
     sellerId: "110",
   },
   {
@@ -134,7 +134,7 @@ export const products = [
     price: 3200,
     discount: 10,
     inStock: true,
-    rating: 4.1,
+    rating: 1,
     sellerId: "122",
   },
   {
@@ -152,7 +152,7 @@ export const products = [
     price: 4440,
     discount: 20,
     inStock: true,
-    rating: 4.4,
+    rating: 5,
     sellerId: "124",
   },
   {
@@ -287,7 +287,7 @@ export const products = [
   {
     id: uuid(),
     tags: ["bestSeller", "DBMS"],
-    publisher: " ‎ S Chand Publishing; Fifth edition (1 January 2016)",
+    publisher: "S Chand Publishing; Fifth edition (1 January 2016)",
     name: "Database Management Systems",
     author: "Rajiv Chopra",
     image:

@@ -52,7 +52,16 @@ export const ProductList = () => {
           <ul className="lg2__aside--left-li tui__pd-in-md tui__pd-b-md ">
             <li className="lg2__aside--head tui__flex--row-space-between tui__width--strech">
               <h4 className="tui__h-4">Filter</h4>
-              <p className="tui__text-sm tui__cursor--pointer">Clear</p>
+              <p
+                className="tui__text-sm tui__cursor--pointer"
+                onClick={(e) =>
+                  dispatchFilterValues({
+                    type: FilterActionType.CLEAR,
+                  })
+                }
+              >
+                Clear
+              </p>
             </li>
 
             <li>
@@ -360,37 +369,38 @@ export const ProductList = () => {
                 ? a.discountPrice - b.discountPrice
                 : 0
             )
-            .filter((product) =>
-              product.discountPrice <= filterValues.highestPriceAmount &&
-              product.inStock &&
-              product.rating >= filterValues.rating &&
-              !(
-                filterValues.categoryAi ||
-                filterValues.categoryDSA ||
-                filterValues.categoryDbms ||
-                filterValues.categoryDiscreteMaths ||
-                filterValues.categorySystemDesign ||
-                filterValues.categoryWebDev
-              )
-                ? true
-                : (filterValues.categoryAi
-                    ? product.tags.some((i) => i === "AI")
-                    : false) ||
-                  (filterValues.categoryDSA
-                    ? product.tags.some((i) => i === "DSA")
-                    : false) ||
-                  (filterValues.categoryDbms
-                    ? product.tags.some((i) => i === "DBMS")
-                    : false) ||
-                  (filterValues.categoryDiscreteMaths
-                    ? product.tags.some((i) => i === "Discrete Maths")
-                    : false) ||
-                  (filterValues.categorySystemDesign
-                    ? product.tags.some((i) => i === "System Design")
-                    : false) ||
-                  (filterValues.categoryWebDev
-                    ? product.tags.some((i) => i === "Web Dev")
-                    : false)
+            .filter(
+              (product) =>
+                product.discountPrice <= filterValues.highestPriceAmount &&
+                product.inStock &&
+                product.rating >= filterValues.rating &&
+                (!(
+                  filterValues.categoryAi ||
+                  filterValues.categoryDSA ||
+                  filterValues.categoryDbms ||
+                  filterValues.categoryDiscreteMaths ||
+                  filterValues.categorySystemDesign ||
+                  filterValues.categoryWebDev
+                )
+                  ? true
+                  : (filterValues.categoryAi
+                      ? product.tags.some((i) => i === "AI")
+                      : false) ||
+                    (filterValues.categoryDSA
+                      ? product.tags.some((i) => i === "DSA")
+                      : false) ||
+                    (filterValues.categoryDbms
+                      ? product.tags.some((i) => i === "DBMS")
+                      : false) ||
+                    (filterValues.categoryDiscreteMaths
+                      ? product.tags.some((i) => i === "Discrete Maths")
+                      : false) ||
+                    (filterValues.categorySystemDesign
+                      ? product.tags.some((i) => i === "System Design")
+                      : false) ||
+                    (filterValues.categoryWebDev
+                      ? product.tags.some((i) => i === "Web Dev")
+                      : false))
             )
             .map((product, e) => (
               <ProductCard
