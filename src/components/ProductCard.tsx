@@ -5,6 +5,7 @@ import {
 
 import {
   deleteUserWishlistProduct,
+  postUserCart,
   postUserWishlist,
 } from 'apis';
 import {
@@ -41,6 +42,13 @@ export const ProductCard = ({
   const [isInWishlistLoaclState, setIsInWishlistLoaclState] =
     useState(isInWishlist);
 
+  const addToCart = async () => {
+    try {
+      await postUserCart(id, { authorinzation: encodedToken });
+    } catch (error) {
+      // will add alerts in actual cart branch
+    }
+  };
   const wishlistToggle = async () => {
     if (isInWishlistLoaclState) {
       setIsInWishlistLoaclState(false);
@@ -61,7 +69,6 @@ export const ProductCard = ({
   useEffect(() => {
     setIsInWishlistLoaclState(isInWishlist);
   }, [isInWishlist]);
-  console.log(isInWishlist, isInWishlistLoaclState);
   return (
     <div className="tui__card tui__flex--col tui__pos--rel  tui__flex--row-space-between tui_card--shadow">
       {" "}
@@ -106,7 +113,10 @@ export const ProductCard = ({
         )}
       </div>
       <div className="tui__card--footer tui__m-sm">
-        <button className="tui__btn--link-br-none tui__child--strech">
+        <button
+          className="tui__btn--link-br-none tui__child--strech"
+          onClick={addToCart}
+        >
           Add To Cart
         </button>
       </div>
