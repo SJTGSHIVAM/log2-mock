@@ -1,4 +1,5 @@
 import {
+  useCallback,
   useEffect,
   useState,
 } from 'react';
@@ -14,6 +15,7 @@ import {
 } from 'consts';
 import { useLogin } from 'hooks';
 import { ProductProp } from 'interfaces';
+import throttle from 'lodash.throttle';
 
 export const ProductCard = ({
   product: {
@@ -39,7 +41,7 @@ export const ProductCard = ({
     loginUser: { encodedToken },
   } = useLogin();
 
-  const [isInWishlistLoaclState, setIsInWishlistLoaclState] =
+  const [isInWishlistLocalState, setIsInWishlistLocalState] =
     useState(isInWishlist);
 
   const addToCart = async () => {
@@ -49,37 +51,43 @@ export const ProductCard = ({
       // will add alerts in actual cart branch
     }
   };
-  const wishlistToggle = async () => {
-    if (isInWishlistLoaclState) {
-      setIsInWishlistLoaclState(false);
+  const cl = console.log;
+  const wishlistToggle = async (isInWishlistLocalState: boolean) => {
+    if (isInWishlistLocalState) {
+      setIsInWishlistLocalState(false);
       try {
         await deleteUserWishlistProduct(id, { authorinzation: encodedToken });
       } catch (error) {
-        setIsInWishlistLoaclState(true);
+        setIsInWishlistLocalState(true);
       }
     } else {
-      setIsInWishlistLoaclState(true);
+      setIsInWishlistLocalState(true);
       try {
         await postUserWishlist(id, { authorinzation: encodedToken });
       } catch (error) {
-        setIsInWishlistLoaclState(false);
+        setIsInWishlistLocalState(false);
       }
     }
   };
+  const wishlistToggleThrottled = useCallback(
+    throttle(wishlistToggle, 1000),
+    []
+  );
+
   useEffect(() => {
-    setIsInWishlistLoaclState(isInWishlist);
+    console.log(isInWishlistLocalState, "dfdfd");
   }, [isInWishlist]);
   return (
     <div className="tui__card tui__flex--col tui__pos--rel  tui__flex--row-space-between tui_card--shadow">
       {" "}
       <button
         className="tui__btn--icon-br-xl tui__card--top-btn-r"
-        onClick={wishlistToggle}
+        onClick={() => wishlistToggleThrottled(isInWishlistLocalState)}
       >
         <img
           className="tui__svg--icon-font"
           src={`${BASE_IMG_URL}/${SVG_IMG}/${
-            isInWishlistLoaclState ? "redheart.svg" : "hollowheart.svg"
+            isInWishlistLocalState ? "redheart.svg" : "hollowheart.svg"
           }`}
           alt="like"
         />
