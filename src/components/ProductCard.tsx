@@ -13,7 +13,6 @@ import {
 } from 'consts';
 import { useLogin } from 'hooks';
 import { ProductProp } from 'interfaces';
-import { v4 as uuid } from 'uuid';
 
 export const ProductCard = ({
   product: {
@@ -64,10 +63,7 @@ export const ProductCard = ({
   }, [isInWishlist]);
   console.log(isInWishlist, isInWishlistLoaclState);
   return (
-    <div
-      className="tui__card tui__flex--col tui__pos--rel  tui__flex--row-space-between tui_card--shadow"
-      key={uuid()}
-    >
+    <div className="tui__card tui__flex--col tui__pos--rel  tui__flex--row-space-between tui_card--shadow">
       {" "}
       <button
         className="tui__btn--icon-br-xl tui__card--top-btn-r"
