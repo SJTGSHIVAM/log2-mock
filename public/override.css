@@ -104,6 +104,9 @@ sub {
 .tui__active {
   background-color: var(--primary-col);
 }
+.tui__flex--wrap {
+  flex-wrap: wrap;
+}
 .tui__cursor--pointer {
   cursor: pointer;
 }

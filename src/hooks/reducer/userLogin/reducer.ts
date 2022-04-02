@@ -18,8 +18,6 @@ function loginReducer(
       localStorage.setItem("fname", fname);
       localStorage.setItem("username", username);
       localStorage.setItem("encodedToken", encodedToken);
-      localStorage.setItem("cartLength", String(cartLength));
-      localStorage.setItem("wishlistLength", String(wishlistLength));
       return {
         ...action.payload,
       };
@@ -29,8 +27,6 @@ function loginReducer(
       localStorage.removeItem("fname");
       localStorage.removeItem("username");
       localStorage.removeItem("encodedToken");
-      localStorage.removeItem("cartLength");
-      localStorage.removeItem("wishlistLength");
       return {
         id: "",
         fname: "",
@@ -59,20 +55,16 @@ export const userLogger = (initialValue: UserLoginData) => {
       encodedToken = localStorage.getItem("encodedToken")
         ? String(localStorage.getItem("encodedToken"))
         : "";
-      cartLength = localStorage.getItem("cartLength")
-        ? Number(localStorage.getItem("cartLength"))
-        : 0;
-      wishlistLength = localStorage.getItem("wishlistLength")
-        ? Number(localStorage.getItem("wishlistLength"))
-        : 0;
+      cartLength = 0;
+      wishlistLength = 0;
 
       return {
         id,
         fname,
         username,
         encodedToken,
-        cartLength: Number(cartLength),
-        wishlistLength: Number(wishlistLength),
+        cartLength: cartLength,
+        wishlistLength: wishlistLength,
       };
     }
   );
