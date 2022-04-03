@@ -62,7 +62,6 @@ export const addItemToCartHandler = function (schema, request) {
     const product = JSON.parse(request.requestBody);
     const { id: prodId } = product;
     const matchedProduct = schema.products.findBy({ id: prodId });
-    console.log("matchedProduct", matchedProduct, 4);
     if (!matchedProduct)
       return new Response(
         400,
@@ -72,7 +71,7 @@ export const addItemToCartHandler = function (schema, request) {
         }
       );
     const cartProductIndex = userCart.findIndex(({ id }) => id === prodId);
-    console.log("cartProductIndex", cartProductIndex, 5);
+
     if (cartProductIndex === -1) {
       userCart.push({
         id: prodId,
@@ -154,7 +153,6 @@ export const updateCartItemHandler = function (schema, request) {
     }
     const { prodId } = request.params;
     const { action, payload = 1 } = JSON.parse(request.requestBody);
-    console.log(typeof payload);
     const userCart = schema.users.findBy({ username }).cart;
     const cartProductIndex = userCart.findIndex(({ id }) => id === prodId);
     if (cartProductIndex === -1)
@@ -169,7 +167,6 @@ export const updateCartItemHandler = function (schema, request) {
       userCart[cartProductIndex].qty = userCart[cartProductIndex].qty + payload;
       userCart[cartProductIndex].updatedAt = formatDate();
     } else if (action === "DEC") {
-      console.log("date passed", userCart, 1);
       if (userCart[cartProductIndex].qty > payload) {
         userCart[cartProductIndex].qty =
           userCart[cartProductIndex].qty - payload;
@@ -178,7 +175,6 @@ export const updateCartItemHandler = function (schema, request) {
       /* this code can cause transactional issues when a user is logged in at more than one devices
     but for current use case of mocking its good enough
      */
-      console.log("date passed", userCart, 1);
     } else
       return new Response(
         400,
@@ -187,8 +183,6 @@ export const updateCartItemHandler = function (schema, request) {
           message: `action should be "DEC" or "INCR" `,
         }
       );
-    console.log("if passed");
-    console.log("date passed", userCart);
 
     this.db.users.update({ username: username }, { cart: userCart });
     const populatedCart = populateCart(userCart, this.db.products);

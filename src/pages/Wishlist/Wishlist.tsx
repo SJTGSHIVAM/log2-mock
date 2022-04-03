@@ -44,7 +44,6 @@ export const Wishlist = () => {
                     : false
                 }
                 invalidate={() => {
-                  console.log("its running!");
                   setInvalidateToggle((p) => !p);
                 }}
                 key={e}
