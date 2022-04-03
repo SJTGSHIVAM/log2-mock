@@ -14,19 +14,29 @@ import { Link } from 'react-router-dom';
 export const Cart = () => {
   const [userCart, setUserCart] = useState<Array<CartProduct>>([]);
   const [invalidateToggle, setInvalidateToggle] = useState(true);
-  const [price, setPrice] = useState(true);
-  const [discount, setDiscount] = useState(true);
-  const [total, setTotal] = useState(true);
-  const [deliveryCharges, setDeliveryCharges] = useState(true);
+  const [price, setPrice] = useState(0);
+  const [discount, setDiscount] = useState(0);
+  const [total, setTotal] = useState(50);
+  const [deliveryCharges, setDeliveryCharges] = useState(50);
   const {
     loginUser: { encodedToken },
   } = useLogin();
   useEffect(() => {
     (async () => {
-      const response = await getUserCart({
+      const {
+        data: { cart },
+      } = await getUserCart({
         authorinzation: encodedToken,
       });
-      setUserCart(response.data.cart);
+      const price = cart.reduce((a, c) => a + c.price * c.qty, 0);
+      const total = cart.reduce((a, c) => a + c.discountPrice * c.qty, 0);
+      const deliveryCharges = total > 500 ? 0 : 50;
+      const discount = price - total;
+      setPrice(price);
+      setDiscount(discount);
+      setTotal(total);
+      setDeliveryCharges(deliveryCharges);
+      setUserCart(cart);
     })();
   }, [invalidateToggle]);
 
@@ -46,28 +56,25 @@ export const Cart = () => {
               <ul className="">
                 <li className="lg2__cart--justify">
                   <div>Price</div>
-                  <div>₹ 4000</div>
+                  <div>₹ {price}</div>
                 </li>
                 <li className="lg2__cart--justify">
                   <div>Discount</div>
-                  <div>₹ -100</div>
+                  <div>₹ {discount}</div>
                 </li>
                 <li className="lg2__cart--justify">
                   <div>Delivery charges</div>
-                  <div>₹ 100</div>
+                  <div>₹ {deliveryCharges}</div>
                 </li>
                 <hr className="tui__text--center lg2__hr" />
 
                 <li className="lg2__cart--justify tui__b-3">
                   <div>Total</div>
-                  <div>₹ 3900</div>
+                  <div>₹ {total}</div>
                 </li>
               </ul>
 
               <hr className="tui__text--center lg2__hr" />
-              <p className="tui__text-sm tui__text--center">
-                You will save 100 on this.
-              </p>
             </div>
 
             <div className="tui__card--footer tui__flex--center tui__pd-md">
