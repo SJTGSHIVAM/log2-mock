@@ -6,6 +6,7 @@ import {
 // @ts-ignore
 import Mockman from 'mockman-js';
 import {
+  Cart,
   ForgotPass,
   Home,
   Login,
@@ -42,10 +43,7 @@ export default function App() {
           </Route>
           <Route path="/user" element={<ProtectedRoute />}>
             <Route path="" element={<h1>User page is under construction</h1>} />
-            <Route
-              path="cart"
-              element={<h1>cart page is under construction</h1>}
-            />
+            <Route path="cart" element={<Cart />} />
             <Route path="wishlist" element={<Wishlist />} />
           </Route>
           <Route path="/mockman" element={<Mockman />} />

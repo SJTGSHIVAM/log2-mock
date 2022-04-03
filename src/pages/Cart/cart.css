@@ -1,0 +1,50 @@
+.lg2__hr {
+  border-bottom: var(--g-border-width-sm) solid var(--theme-dark);
+  width: 90%;
+  margin: var(--margin-md);
+}
+.lg2__cart--justify {
+  display: grid;
+  grid-template-columns: 40% 40%;
+  /* margin: var(--margin-md) auto; */
+  justify-content: center;
+}
+
+.lg2__card--cart {
+  max-width: 30rem;
+  width: 90%;
+}
+.lg2__card--cart-item {
+  max-width: 40rem;
+  min-width: 80%;
+  max-height: 30rem;
+}
+.lg2__card--hor img {
+  min-height: 100%;
+  max-width: 100%;
+}
+@media screen and (min-width: 768px) {
+  .lg2__main--content {
+    display: grid;
+    grid-auto-flow: dense;
+    grid-auto-rows: 1fr;
+    grid-template-columns: 50% 50%;
+  }
+  .lg2__aside--right {
+    grid-area: rside;
+  }
+  .lg2__footer {
+    grid-area: foot;
+  }
+  .lg2__card--cart {
+    grid-column: 2;
+    position: sticky;
+    grid-row: span 1;
+    top: 5%;
+  }
+  .lg2__card--cart-item {
+    grid-column: 1;
+    min-width: 100%;
+  }
+}
+/*=====  End of usage layout  ======*/
