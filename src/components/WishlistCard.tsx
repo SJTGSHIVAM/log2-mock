@@ -12,9 +12,13 @@ import {
   SVG_IMG,
 } from 'consts';
 import { useLogin } from 'hooks';
-import { ProductProp } from 'interfaces';
+import { ProductInvalidatorProp } from 'interfaces';
 import throttle from 'lodash.throttle';
 import { useNavigate } from 'react-router-dom';
+import {
+  toastError,
+  toastSuccess,
+} from 'utils';
 
 export const WishlistCard = ({
   product: {
@@ -35,7 +39,7 @@ export const WishlistCard = ({
   },
   isInWishlist,
   invalidate,
-}: ProductProp) => {
+}: ProductInvalidatorProp) => {
   const {
     isAuth,
     loginUser: { encodedToken },
@@ -45,8 +49,9 @@ export const WishlistCard = ({
   const addToCart = async (id: string, encodedToken: string) => {
     try {
       await postUserCart(id, { authorinzation: encodedToken });
+      toastSuccess("Added to cart");
     } catch (error) {
-      // will add alerts in actual cart branch
+      toastError();
     }
   };
   const wishlistToggle = async (
@@ -58,7 +63,7 @@ export const WishlistCard = ({
       await deleteUserWishlistProduct(id, { authorinzation: encodedToken });
       invalidate();
     } catch (error) {
-      //do something
+      toastError();
     }
   };
   const wishlistToggleThrottled = useCallback(

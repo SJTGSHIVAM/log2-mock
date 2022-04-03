@@ -39,7 +39,7 @@
   .lg2__card--cart {
     grid-column: 2;
     position: sticky;
-    grid-row: span 1;
+    grid-row: span 1git;
     top: 5%;
   }
   .lg2__card--cart-item {

@@ -1,3 +1,5 @@
+import 'react-toastify/dist/ReactToastify.css';
+
 import {
   FORGOT_PASS_ROUTE,
   USER_LOGIN_ROUTE,
@@ -18,6 +20,7 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import {
   Footer,
@@ -33,6 +36,18 @@ export default function App() {
         <Navbar />
       </header>
       <main className="lg2__main tui__m-xl">
+        <ToastContainer
+          position="top-left"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<ProductList />} />

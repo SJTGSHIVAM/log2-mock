@@ -5,20 +5,21 @@ import {
   useState,
 } from 'react';
 
-import {
-  getUserCart,
-  getUserWishlist,
-} from 'apis';
+import { getUserCart } from 'apis';
 import { CartCard } from 'components';
 import { useLogin } from 'hooks';
-import { Product } from 'interfaces';
+import { CartProduct } from 'interfaces';
+import { Link } from 'react-router-dom';
 
 export const Cart = () => {
-  const [userCart, setUserCart] = useState<Array<Product>>([]);
-  const [userWishlist, setUserWishlist] = useState<Array<Product>>([]);
+  const [userCart, setUserCart] = useState<Array<CartProduct>>([]);
+  const [invalidateToggle, setInvalidateToggle] = useState(true);
+  const [price, setPrice] = useState(true);
+  const [discount, setDiscount] = useState(true);
+  const [total, setTotal] = useState(true);
+  const [deliveryCharges, setDeliveryCharges] = useState(true);
   const {
     loginUser: { encodedToken },
-    isAuth,
   } = useLogin();
   useEffect(() => {
     (async () => {
@@ -26,15 +27,8 @@ export const Cart = () => {
         authorinzation: encodedToken,
       });
       setUserCart(response.data.cart);
-      if (isAuth()) {
-        const response = await getUserWishlist({
-          authorinzation: encodedToken,
-        });
-
-        setUserWishlist(response.data.wishlist);
-      }
     })();
-  }, []);
+  }, [invalidateToggle]);
 
   return (
     <>
@@ -77,12 +71,12 @@ export const Cart = () => {
             </div>
 
             <div className="tui__card--footer tui__flex--center tui__pd-md">
-              <a href="/checkout" className="tui__width--80">
+              <Link to="/checkout" className="tui__width--80">
                 <button className="tui__btn--link-br-none tui__width--100">
                   {" "}
                   Place order{" "}
                 </button>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -91,9 +85,10 @@ export const Cart = () => {
           userCart.map((product, e) => (
             <CartCard
               product={product}
-              isInWishlist={
-                isAuth() ? userWishlist.some((p) => p.id === product.id) : false
-              }
+              isInWishlist={false}
+              invalidate={() => {
+                setInvalidateToggle((p) => !p);
+              }}
               key={e}
             />
           ))

@@ -82,13 +82,13 @@ export const addItemToCartHandler = function (schema, request) {
       });
       this.db.users.update({ username: username }, { cart: userCart });
       const populatedCart = populateCart(userCart, this.db.products);
-      return new Response(201, {}, { cart: popelatedCart });
+      return new Response(201, {}, { cart: populatedCart });
     }
     userCart[cartProductIndex].qty = userCart[cartProductIndex].qty + 1;
     userCart[cartProductIndex].updatedAt = formatDate();
     this.db.users.update({ username: username }, { cart: userCart });
     const populatedCart = populateCart(userCart, this.db.products);
-    return new Response(201, {}, { cart: populateCart });
+    return new Response(201, {}, { cart: populatedCart });
   } catch (error) {
     return new Response(
       500,
