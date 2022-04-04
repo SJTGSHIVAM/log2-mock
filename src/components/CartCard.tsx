@@ -51,7 +51,7 @@ export const CartCard = ({
   ) => {
     try {
       await updateUserCartProduct(id, action, payload, {
-        authorinzation: encodedToken,
+        authorization: encodedToken,
       });
       invalidate();
     } catch (error) {
@@ -65,7 +65,7 @@ export const CartCard = ({
     invalidate: () => void
   ) => {
     try {
-      await deleteUserCartProduct(id, { authorinzation: encodedToken });
+      await deleteUserCartProduct(id, { authorization: encodedToken });
 
       invalidate();
     } catch (error) {
@@ -78,7 +78,7 @@ export const CartCard = ({
     invalidate: () => void
   ) => {
     try {
-      postUserWishlist(id, { authorinzation: encodedToken });
+      postUserWishlist(id, { authorization: encodedToken });
       await removeFromCartThrottled(id, encodedToken, invalidate);
     } catch (error) {
       toastError();

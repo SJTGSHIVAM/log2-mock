@@ -26,7 +26,7 @@ export const Cart = () => {
       const {
         data: { cart },
       } = await getUserCart({
-        authorinzation: encodedToken,
+        authorization: encodedToken,
       });
       const price: number = cart.reduce((a, c) => a + c.price * c.qty, 0);
       let total: number = cart.reduce((a, c) => a + c.discountPrice * c.qty, 0);

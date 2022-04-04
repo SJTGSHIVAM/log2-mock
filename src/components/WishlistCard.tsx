@@ -48,7 +48,7 @@ export const WishlistCard = ({
 
   const addToCart = async (id: string, encodedToken: string) => {
     try {
-      await postUserCart(id, { authorinzation: encodedToken });
+      await postUserCart(id, { authorization: encodedToken });
       toastSuccess("Added to cart");
     } catch (error) {
       toastError();
@@ -60,7 +60,7 @@ export const WishlistCard = ({
     invalidate: () => void
   ) => {
     try {
-      await deleteUserWishlistProduct(id, { authorinzation: encodedToken });
+      await deleteUserWishlistProduct(id, { authorization: encodedToken });
       invalidate();
     } catch (error) {
       toastError();

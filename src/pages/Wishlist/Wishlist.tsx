@@ -21,7 +21,7 @@ export const Wishlist = () => {
     (async () => {
       if (isAuth()) {
         const response = await getUserWishlist({
-          authorinzation: encodedToken,
+          authorization: encodedToken,
         });
 
         setUserWishlist(response.data.wishlist);

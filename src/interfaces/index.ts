@@ -23,7 +23,7 @@ interface UserSignupInputData {
 }
 
 interface AuthHead {
-  authorinzation: string;
+  authorization: string;
 }
 interface Product {
   id: string;
