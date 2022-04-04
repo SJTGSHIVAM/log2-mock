@@ -16,8 +16,8 @@ export const Cart = () => {
   const [invalidateToggle, setInvalidateToggle] = useState(true);
   const [price, setPrice] = useState(0);
   const [discount, setDiscount] = useState(0);
-  const [total, setTotal] = useState(50);
-  const [deliveryCharges, setDeliveryCharges] = useState(50);
+  const [total, setTotal] = useState(0);
+  const [deliveryCharges, setDeliveryCharges] = useState(0);
   const {
     loginUser: { encodedToken },
   } = useLogin();
@@ -28,10 +28,11 @@ export const Cart = () => {
       } = await getUserCart({
         authorinzation: encodedToken,
       });
-      const price = cart.reduce((a, c) => a + c.price * c.qty, 0);
-      const total = cart.reduce((a, c) => a + c.discountPrice * c.qty, 0);
-      const deliveryCharges = total > 500 ? 0 : 50;
+      const price: number = cart.reduce((a, c) => a + c.price * c.qty, 0);
+      let total: number = cart.reduce((a, c) => a + c.discountPrice * c.qty, 0);
+      const deliveryCharges = total > 2500 || total <= 0 ? 0 : 50;
       const discount = price - total;
+      if (deliveryCharges > 0) total += deliveryCharges;
       setPrice(price);
       setDiscount(discount);
       setTotal(total);

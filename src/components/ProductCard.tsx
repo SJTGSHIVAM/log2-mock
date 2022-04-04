@@ -53,8 +53,7 @@ export const ProductCard = ({
       await postUserCart(id, { authorinzation: encodedToken });
       toastSuccess("Added to cart");
     } catch (error) {
-      //@ts-ignore
-      toastError(error.response.data.message);
+      toastError();
     }
   };
   const wishlistToggle = async (

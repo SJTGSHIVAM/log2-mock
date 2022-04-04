@@ -4,32 +4,32 @@ import {
   FaLinkedinIn,
   FaMedium,
 } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-
-import FooterCSS from './footer.module.css';
 
 export const Footer = () => (
-  <footer className={`${FooterCSS["lg2__footer"]} tui__flex--col-align-center`}>
+  <footer className={"lg2__footer tui__flex--col-align-center"}>
     <ul>
       <li className="footerLink">
-        <Link to="https://github.com/SJTGSHIVAM">
+        <a href="https://github.com/SJTGSHIVAM" target="blank">
           <FaGithub />
-        </Link>
+        </a>
       </li>
       <li className="footerLink">
-        <Link to="https://sjtgshivam.medium.com">
+        <a href="https://sjtgshivam.medium.com" target="blank">
           <FaMedium />
-        </Link>
+        </a>
       </li>
       <li className="footerLink">
-        <Link to="https://www.linkedin.com/in/shivam-pandey-766524161">
+        <a
+          href="https://www.linkedin.com/in/shivam-pandey-766524161"
+          target="blank"
+        >
           <FaLinkedinIn />
-        </Link>
+        </a>
       </li>
       <li className="footerLink">
-        <Link to="https://sjtgshivam.netlify.app/">
+        <a href="https://sjtgshivam.netlify.app/" target="blank">
           <FaBriefcase />
-        </Link>
+        </a>
       </li>
     </ul>
     <div className="legacyText">© 2021 | Shivam Pandey</div>

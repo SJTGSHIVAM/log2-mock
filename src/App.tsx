@@ -1,4 +1,5 @@
 import 'react-toastify/dist/ReactToastify.css';
+import 'app.css';
 
 import {
   FORGOT_PASS_ROUTE,

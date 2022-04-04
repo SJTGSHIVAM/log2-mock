@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 export const Navbar = () => {
   const { loginUser, dispatchLoginUser, isAuth } = useLogin();
   return (
-    <nav className="tui__nav--box tui__pd-in-xl tui__pd-tb-md">
+    <nav className="tui__nav--box tui__pd-in-xxxs tui__pd-tb-md">
       <h1 className="tui__nav--logo tui__h-3">
         <Link to="/">
           Log<sub>2</sub>
@@ -49,7 +49,7 @@ export const Navbar = () => {
           </button>
         </li>
         <li>
-          <div className="tui__avatar-br-lg tui__flex--center tui__avatar-md tui__m-in-xxs">
+          <div className="tui__avatar-br-lg tui__flex--center tui__avatar-md tui__cursor--pointer tui__m-in-xxs">
             <img
               className="tui__theme--switch tui__col--svg tui__img-hw100"
               src={`${BASE_IMG_URL}/${SVG_IMG}/moon.svg`}

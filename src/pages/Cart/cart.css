@@ -33,9 +33,6 @@
   .lg2__aside--right {
     grid-area: rside;
   }
-  .lg2__footer {
-    grid-area: foot;
-  }
   .lg2__card--cart {
     grid-column: 2;
     position: sticky;
