@@ -100,7 +100,12 @@ sub {
 #radio5:checked ~ .tui__first {
   margin-left: -80%;
 }
-
+.tui__card--hor * {
+  overflow: visible;
+}
+.tui__w--100 {
+  width: 100%;
+}
 .tui__active {
   background-color: var(--primary-col);
 }
@@ -120,5 +125,9 @@ sub {
 .tui__z--1 {
   z-index: 1;
 }
-
+@media (max-width: 40rem) {
+  :root {
+    font-size: 0.8rem;
+  }
+}
 /*=====  End of z index  ======*/

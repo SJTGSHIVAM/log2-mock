@@ -44,10 +44,19 @@ interface Product {
 interface ProductProp {
   product: Product;
   isInWishlist: boolean;
-  invalidate?: () => void;
+}
+interface ProductInvalidatorProp {
+  product: Product;
+  isInWishlist: boolean;
+  invalidate: () => void;
 }
 interface CartProduct extends Product {
   qty: number;
+}
+interface CartProductInvalidatorProp {
+  product: CartProduct;
+  isInWishlist: boolean;
+  invalidate: () => void;
 }
 interface User {
   id: string;
@@ -69,7 +78,9 @@ interface User {
 export type {
   AuthHead,
   CartProduct,
+  CartProductInvalidatorProp,
   Product,
+  ProductInvalidatorProp,
   ProductProp,
   User,
   UserLoginData,

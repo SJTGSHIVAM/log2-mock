@@ -5,3 +5,4 @@ export { ProtectedRoute } from './ProtectedRoute';
 export { LoggedOutRoute } from './LoggedOutRoute';
 export { ProductCard } from './ProductCard';
 export { WishlistCard } from './WishlistCard';
+export { CartCard } from './CartCard';

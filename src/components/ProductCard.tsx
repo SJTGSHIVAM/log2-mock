@@ -17,6 +17,10 @@ import { useLogin } from 'hooks';
 import { ProductProp } from 'interfaces';
 import throttle from 'lodash.throttle';
 import { useNavigate } from 'react-router-dom';
+import {
+  toastError,
+  toastSuccess,
+} from 'utils';
 
 export const ProductCard = ({
   product: {
@@ -47,8 +51,9 @@ export const ProductCard = ({
   const addToCart = async (id: string, encodedToken: string) => {
     try {
       await postUserCart(id, { authorinzation: encodedToken });
+      toastSuccess("Added to cart");
     } catch (error) {
-      // will add alerts in actual cart branch
+      toastError();
     }
   };
   const wishlistToggle = async (
@@ -62,6 +67,7 @@ export const ProductCard = ({
         await deleteUserWishlistProduct(id, { authorinzation: encodedToken });
       } catch (error) {
         setIsInWishlistLocalState(true);
+        toastError();
       }
     } else {
       setIsInWishlistLocalState(true);
@@ -69,6 +75,7 @@ export const ProductCard = ({
         await postUserWishlist(id, { authorinzation: encodedToken });
       } catch (error) {
         setIsInWishlistLocalState(false);
+        toastError();
       }
     }
   };

@@ -1,3 +1,6 @@
+import 'react-toastify/dist/ReactToastify.css';
+import 'app.css';
+
 import {
   FORGOT_PASS_ROUTE,
   USER_LOGIN_ROUTE,
@@ -6,6 +9,7 @@ import {
 // @ts-ignore
 import Mockman from 'mockman-js';
 import {
+  Cart,
   ForgotPass,
   Home,
   Login,
@@ -17,6 +21,7 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import {
   Footer,
@@ -32,6 +37,18 @@ export default function App() {
         <Navbar />
       </header>
       <main className="lg2__main tui__m-xl">
+        <ToastContainer
+          position="top-left"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<ProductList />} />
@@ -42,10 +59,7 @@ export default function App() {
           </Route>
           <Route path="/user" element={<ProtectedRoute />}>
             <Route path="" element={<h1>User page is under construction</h1>} />
-            <Route
-              path="cart"
-              element={<h1>cart page is under construction</h1>}
-            />
+            <Route path="cart" element={<Cart />} />
             <Route path="wishlist" element={<Wishlist />} />
           </Route>
           <Route path="/mockman" element={<Mockman />} />
