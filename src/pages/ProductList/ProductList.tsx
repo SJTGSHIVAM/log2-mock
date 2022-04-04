@@ -1,21 +1,15 @@
-import './productList.css';
+import "./productList.css";
 
-import {
-  useEffect,
-  useState,
-} from 'react';
+import { useEffect, useState } from "react";
 
-import {
-  getProducts,
-  getUserWishlist,
-} from 'apis';
-import { ProductCard } from 'components/ProductCard';
-import { useLogin } from 'hooks';
-import { Product } from 'interfaces';
-import { useSearchParams } from 'react-router-dom';
+import { getProducts, getUserWishlist } from "apis";
+import { ProductCard } from "components/ProductCard";
+import { useLogin } from "hooks";
+import { Product } from "interfaces";
+import { useSearchParams } from "react-router-dom";
 
-import { FilterActionType } from './reducer/actionTypes';
-import { useFilterReducer } from './reducer/reducer';
+import { FilterActionType } from "./reducer/actionTypes";
+import { useFilterReducer } from "./reducer/reducer";
 
 export const ProductList = () => {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
@@ -401,7 +395,7 @@ export const ProductList = () => {
           </ul>
         )}
       </aside>
-      <div className="lg2__products--grid">
+      <div className="lg2__products--grid tui__m-t-md                                                                                                                                                                                                                                                                                                           ">
         {products.length > 0 &&
           [...products]
             .sort((a, b) =>
