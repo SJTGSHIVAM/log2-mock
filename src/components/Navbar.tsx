@@ -23,7 +23,6 @@ export const Navbar = () => {
   useEffect(() => {
     let theme = localStorage.getItem("lg2__theme");
     if (theme === "dark") {
-      console.log("yess");
       setGlobalThemeDark(true);
       setTheme();
     } else if (theme === "light") {

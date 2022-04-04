@@ -12,6 +12,7 @@ import {
 import { ProductCard } from 'components/ProductCard';
 import { useLogin } from 'hooks';
 import { Product } from 'interfaces';
+import { useSearchParams } from 'react-router-dom';
 
 import { FilterActionType } from './reducer/actionTypes';
 import { useFilterReducer } from './reducer/reducer';
@@ -25,8 +26,49 @@ export const ProductList = () => {
     loginUser: { encodedToken },
     isAuth,
   } = useLogin();
+  let [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
     (async () => {
+      const category = searchParams.get("category");
+      switch (category) {
+        case "DSA":
+          dispatchFilterValues({
+            type: FilterActionType.CATEGORYDSA,
+            payload: true,
+          });
+          break;
+        case "AI":
+          dispatchFilterValues({
+            type: FilterActionType.CATEGORYAI,
+            payload: true,
+          });
+          break;
+        case "DBMS":
+          dispatchFilterValues({
+            type: FilterActionType.CATEGORYDBMS,
+            payload: true,
+          });
+          break;
+        case "System Design":
+          dispatchFilterValues({
+            type: FilterActionType.CATEGORYSYSTEMDESIGN,
+            payload: true,
+          });
+          break;
+        case "Web Dev":
+          dispatchFilterValues({
+            type: FilterActionType.CATEGORYWEBDEV,
+            payload: true,
+          });
+          break;
+        case "Discrete Maths":
+          dispatchFilterValues({
+            type: FilterActionType.CATEGORYDISCRETEMATHS,
+            payload: true,
+          });
+          break;
+      }
+      setSearchParams("");
       const response = await getProducts();
       setProducts(response.data.products);
       if (isAuth()) {
