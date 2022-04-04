@@ -39,71 +39,71 @@ const userSignup = async ({
     contact,
     password,
   });
-const getUser = async ({ authorinzation }: AuthHead) =>
+const getUser = async ({ authorization }: AuthHead) =>
   axios.get<{ user: User }>(`${BASE_API_URL}/user`, {
-    headers: { authorinzation },
+    headers: { authorization },
   });
 
-const getUserCart = async ({ authorinzation }: AuthHead) =>
+const getUserCart = async ({ authorization }: AuthHead) =>
   axios.get<{ cart: Array<CartProduct> }>(`${BASE_API_URL}/user/cart`, {
-    headers: { authorinzation },
+    headers: { authorization },
   });
 
-const postUserCart = async (productId: string, { authorinzation }: AuthHead) =>
+const postUserCart = async (productId: string, { authorization }: AuthHead) =>
   axios.post<{ cart: Array<CartProduct> }>(
     `${BASE_API_URL}/user/cart`,
     { id: productId },
     {
-      headers: { authorinzation },
+      headers: { authorization },
     }
   );
 const updateUserCartProduct = async (
   productId: string,
   action: CartAction,
   payload: number,
-  { authorinzation }: AuthHead
+  { authorization }: AuthHead
 ) =>
   axios.put<{ cart: Array<CartProduct> }>(
     `${BASE_API_URL}/user/cart/${productId}`,
     { action, payload },
     {
-      headers: { authorinzation },
+      headers: { authorization },
     }
   );
 const deleteUserCartProduct = async (
   productId: string,
-  { authorinzation }: AuthHead
+  { authorization }: AuthHead
 ) =>
   axios.delete<{ cart: Array<CartProduct> }>(
     `${BASE_API_URL}/user/cart/${productId}`,
     {
-      headers: { authorinzation },
+      headers: { authorization },
     }
   );
-const getUserWishlist = async ({ authorinzation }: AuthHead) =>
+const getUserWishlist = async ({ authorization }: AuthHead) =>
   axios.get<{ wishlist: Array<Product> }>(`${BASE_API_URL}/user/wishlist`, {
-    headers: { authorinzation },
+    headers: { authorization },
   });
 
 const postUserWishlist = async (
   productId: string,
-  { authorinzation }: AuthHead
+  { authorization }: AuthHead
 ) =>
   axios.post<{ wishlist: Array<Product> }>(
     `${BASE_API_URL}/user/wishlist`,
     { id: productId },
     {
-      headers: { authorinzation },
+      headers: { authorization },
     }
   );
 const deleteUserWishlistProduct = async (
   productId: string,
-  { authorinzation }: AuthHead
+  { authorization }: AuthHead
 ) =>
   axios.delete<{ cart: Array<Product> }>(
     `${BASE_API_URL}/user/wishlist/${productId}`,
     {
-      headers: { authorinzation },
+      headers: { authorization },
     }
   );
 const getProducts = async () =>

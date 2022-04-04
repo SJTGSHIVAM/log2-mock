@@ -50,7 +50,7 @@ export const ProductCard = ({
     useState(isInWishlist);
   const addToCart = async (id: string, encodedToken: string) => {
     try {
-      await postUserCart(id, { authorinzation: encodedToken });
+      await postUserCart(id, { authorization: encodedToken });
       toastSuccess("Added to cart");
     } catch (error) {
       toastError();
@@ -64,7 +64,7 @@ export const ProductCard = ({
     if (isInWishlistLocalState) {
       setIsInWishlistLocalState(false);
       try {
-        await deleteUserWishlistProduct(id, { authorinzation: encodedToken });
+        await deleteUserWishlistProduct(id, { authorization: encodedToken });
       } catch (error) {
         setIsInWishlistLocalState(true);
         toastError();
@@ -72,7 +72,7 @@ export const ProductCard = ({
     } else {
       setIsInWishlistLocalState(true);
       try {
-        await postUserWishlist(id, { authorinzation: encodedToken });
+        await postUserWishlist(id, { authorization: encodedToken });
       } catch (error) {
         setIsInWishlistLocalState(false);
         toastError();

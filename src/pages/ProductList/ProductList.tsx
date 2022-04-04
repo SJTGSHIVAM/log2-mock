@@ -1,15 +1,21 @@
-import "./productList.css";
+import './productList.css';
 
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useState,
+} from 'react';
 
-import { getProducts, getUserWishlist } from "apis";
-import { ProductCard } from "components/ProductCard";
-import { useLogin } from "hooks";
-import { Product } from "interfaces";
-import { useSearchParams } from "react-router-dom";
+import {
+  getProducts,
+  getUserWishlist,
+} from 'apis';
+import { ProductCard } from 'components/ProductCard';
+import { useLogin } from 'hooks';
+import { Product } from 'interfaces';
+import { useSearchParams } from 'react-router-dom';
 
-import { FilterActionType } from "./reducer/actionTypes";
-import { useFilterReducer } from "./reducer/reducer";
+import { FilterActionType } from './reducer/actionTypes';
+import { useFilterReducer } from './reducer/reducer';
 
 export const ProductList = () => {
   const [isFilterVisible, setIsFilterVisible] = useState(false);
@@ -67,7 +73,7 @@ export const ProductList = () => {
       setProducts(response.data.products);
       if (isAuth()) {
         const response = await getUserWishlist({
-          authorinzation: encodedToken,
+          authorization: encodedToken,
         });
 
         setUserWishlist(response.data.wishlist);
